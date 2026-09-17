@@ -3,9 +3,10 @@
 This is **commissioned work**. Most of what you see on screen is not mine.
 This file records who made what, so nothing here is passed off as my own.
 
-> **TODO before making this repo public:** replace `[CLIENT NAME]` below with the
-> client's actual name or studio, and confirm with them how they want to be
-> credited (or whether they would rather not be named at all).
+> **⚠ OUTSTANDING — the repo is already public.** `[CLIENT NAME]` below is still a
+> placeholder. Ask the client for the name or studio they want credited, and whether
+> they want to be named at all. Until then this page credits their work to nobody,
+> which is the one thing this file exists to prevent.
 
 ---
 
@@ -29,6 +30,10 @@ permission. See [LICENSE](LICENSE).
 | `assets/roiet/coffin.png` | Coffin / bier object layer |
 | `assets/roiet/villager.png` | Villager object layer |
 | `assets/roiet/villager-portrait.png` | Villager portrait for the dialog box |
+
+The site is published at https://sh1usez.github.io/Way-To-Remain/, so these files
+are served publicly. GitHub Pages cannot be access-restricted on a free or Pro
+account — making the repository private would hide the source, not the artwork.
 
 The client also supplied layout reference images (the files named
 `ตัวอย่างจัดวาง…`). Those are not committed here — they were used only to
@@ -62,7 +67,7 @@ they exist to be replaced. Do not treat them as the game's writing.
 ## Code
 
 Everything in `css/`, `js/`, `data/` and the `.html` files was written by me,
-with assistance from Claude (Anthropic).
+with assistance from Claude (Anthropic). Commit authorship is mine alone.
 
 > **This repo is public but not open source.** Because the work was commissioned,
 > ownership of the code may sit with the client depending on the agreement, so no
