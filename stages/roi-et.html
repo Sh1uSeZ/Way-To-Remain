@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ways to Remain — ร้อยเอ็ด</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/panorama.css">
+<link rel="stylesheet" href="../css/dialog.css">
+</head>
+<body>
+
+<div class="viewport" id="viewport">
+  <div class="world" id="world">
+    <img class="world__bg" src="../assets/roiet/scene.png" alt="หมู่บ้านริมน้ำ จังหวัดร้อยเอ็ด">
+
+    <div class="obj obj--coffin"><img src="../assets/roiet/coffin.png" alt=""></div>
+    <div class="obj obj--villager"><img src="../assets/roiet/villager.png" alt=""></div>
+
+    <button class="hotspot hotspot--coffin"   type="button" data-obj="coffin"   aria-label="โลงศพ"></button>
+    <button class="hotspot hotspot--villager" type="button" data-obj="villager" aria-label="ผู้เฒ่า"></button>
+  </div>
+</div>
+
+<div class="tag" id="tag"></div>
+<button class="back" id="backBtn" type="button">&lsaquo; กลับหน้าเลือกด่าน</button>
+
+<div class="dim" id="dim"></div>
+<div class="dialog" id="dialog">
+  <img class="dialog__portrait" id="dialogPortrait" src="" alt="" hidden>
+  <div class="dialog__name" id="dialogName"></div>
+  <div class="dialog__text" id="dialogText"></div>
+  <div class="dialog__next">&#9660;</div>
+</div>
+
+<script src="../js/core/transition.js"></script>
+<script src="../js/core/dialog.js"></script>
+<script src="../js/core/panorama.js"></script>
+<script src="../data/roiet-dialog.js"></script>
+<script src="../js/stages/roi-et.js"></script>
+</body>
+</html>

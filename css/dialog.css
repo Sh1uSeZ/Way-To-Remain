@@ -1,0 +1,54 @@
+/* กล่องบทสนทนา + ฉากหลังหรี่ — ใช้ซ้ำได้ทุกด่าน */
+/* --- Dialog --- */
+.dim {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,.45);
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s var(--ease);
+}
+.dim.is-open { opacity: 1; pointer-events: auto; cursor: pointer; }
+
+.dialog {
+  position: fixed; z-index: 600;
+  left: 50%; bottom: 4.5vh;
+  transform: translate(-50%, 18px);
+  width: min(1120px, 88vw);
+  min-height: 21vh;
+  background: rgba(0,0,0,.86);
+  border: 2px solid rgba(217,214,206,.38);
+  border-radius: 12px;
+  padding: 2.4vh 3vw 2.4vh clamp(150px, 15vw, 260px);
+  color: var(--paper);
+  opacity: 0; pointer-events: none;
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
+
+.dialog__portrait {
+  position: absolute; left: clamp(-10px, -.6vw, 0px); bottom: 0;
+  height: clamp(210px, 33vh, 420px);
+  width: auto;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,.6));
+}
+.dialog__portrait[hidden] { display: none; }
+
+.dialog__name {
+  font-size: clamp(15px, 1.35vw, 22px); font-weight: 700;
+  color: #fff; margin-bottom: .5em;
+}
+.dialog__name:empty { display: none; }
+
+.dialog__text {
+  font-size: clamp(15px, 1.35vw, 23px);
+  line-height: 1.75;
+  min-height: 3.5em;
+  white-space: pre-wrap;
+}
+
+.dialog__next {
+  position: absolute; right: 1.6vw; bottom: 1.2vh;
+  font-size: clamp(13px, 1.1vw, 18px); opacity: .6;
+  animation: nudge 1.4s ease-in-out infinite;
+}
+@keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }

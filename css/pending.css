@@ -1,0 +1,17 @@
+/* หน้าโครงว่างที่ยังรอไฟล์ภาพจากลูกค้า */
+body { display: grid; place-items: center; background: #0b0a09; }
+.pending {
+  width: min(760px, 86vw); text-align: center; color: var(--paper);
+  border: 2px dashed rgba(217,214,206,.3); border-radius: 14px;
+  padding: 6vh 4vw;
+}
+.pending h1 { font-size: clamp(22px, 2.6vw, 38px); margin-bottom: .6em; }
+.pending p  { font-size: clamp(14px, 1.3vw, 20px); line-height: 1.85; opacity: .8; }
+.pending ol { text-align: left; display: inline-block; margin: 1.6em 0 0; opacity: .55;
+              font-size: clamp(13px, 1.15vw, 18px); line-height: 2; }
+.pending .back {
+  margin-top: 2.4em; font-family: var(--font); font-size: clamp(14px, 1.2vw, 19px);
+  color: var(--paper); background: none; border: 1px solid rgba(217,214,206,.45);
+  border-radius: 999px; padding: .6em 1.8em; cursor: pointer;
+}
+.pending .back:hover { background: rgba(217,214,206,.12); }

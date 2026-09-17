@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ways to Remain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/title.css">
+</head>
+<body>
+
+<div class="stage">
+  <img class="stage__bg" src="./assets/title/title-bg.png" alt="">
+
+  <!-- โลโก้ "Ways to Remain" และเส้นขีด วาดมาในไฟล์ภาพพื้นหลังอยู่แล้ว
+       หน้านี้จึงเติมเฉพาะปุ่ม Start ด้วยฟอนต์ Playpen Sans Thai -->
+  <button class="start" id="startBtn" type="button">Start</button>
+</div>
+
+<div class="intro" id="intro">
+  <video class="intro__video" id="introVideo" src="./assets/title/intro.mp4" playsinline preload="auto"></video>
+  <button class="intro__skip" id="skipBtn" type="button">ข้าม &rsaquo;&rsaquo;</button>
+</div>
+
+<script src="./js/core/transition.js"></script>
+<script src="./js/screens/title.js"></script>
+</body>
+</html>

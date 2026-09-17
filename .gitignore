@@ -1,0 +1,53 @@
+# --- OS junk ---
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# --- Editors / IDEs ---
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Claude Code / local agent config ---
+.claude/
+CLAUDE.local.md
+
+# --- Node, if tooling is ever added ---
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+dist/
+build/
+.cache/
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+
+# --- Source art (working files, not shipped) ---
+# The exported PNG/MP4 under assets/ MUST stay committed — GitHub Pages serves
+# them. Only layered/working files are ignored here.
+*.psd
+*.clip
+*.kra
+*.xcf
+*.ai
+*.aep
+*.prproj
+
+# Client layout references ("ตัวอย่างจัดวาง" / "ไม่ต้องโหลด") — guides only,
+# never loaded by the game.
+**/*ไม่ต้องโหลด*
+
+# --- Logs / temp ---
+*.log
+*.tmp
