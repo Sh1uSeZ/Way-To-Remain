@@ -2,36 +2,42 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="color-scheme" content="light">
 <title>Ways to Remain — Lobby</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/mobile.css">
 <link rel="stylesheet" href="./css/lobby.css">
 </head>
 <body>
 
 <div class="lobby">
-  <div class="board" id="board">
-    <img class="board__bg" src="./assets/lobby/passport.png" alt="หนังสือเดินทาง">
+  <div class="camera" id="camera">
+    <div class="board" id="board">
+      <img class="board__bg" src="./assets/lobby/passport.png" alt="หนังสือเดินทาง">
 
-    <!-- data-focus-x/y = the point (in % of the board) the camera pushes toward -->
-    <button class="card card--ticket card--live" type="button"
-            data-focus-x="30.71" data-focus-y="71.67"
-            data-goto="./stages/roi-et.html"
-            data-label="ร้อยเอ็ด — Roi Et, TH">
-      <img src="./assets/lobby/ticket-roiet.png" alt="ตั๋วโดยสาร ปลายทาง ร้อยเอ็ด">
-    </button>
+      <!-- data-focus-x/y = จุดที่กล้องจะแพนเข้าไปหา (% ของกระดาน) -->
+      <button class="card card--ticket card--live" type="button"
+              data-focus-x="30.71" data-focus-y="71.67"
+              data-goto="./stages/roi-et.html"
+              data-label="ร้อยเอ็ด — Roi Et, TH">
+        <img src="./assets/lobby/ticket-roiet.png" alt="ตั๋วโดยสาร ปลายทาง ร้อยเอ็ด">
+      </button>
 
-    <div class="card card--bangkok card--locked"><img src="./assets/lobby/stamp-bangkok.png" alt=""></div>
-    <div class="card card--png     card--locked"><img src="./assets/lobby/stamp-png.png"     alt=""></div>
-    <div class="card card--japan   card--locked"><img src="./assets/lobby/stamp-japan.png"   alt=""></div>
+      <div class="card card--bangkok card--locked"><img src="./assets/lobby/stamp-bangkok.png" alt=""></div>
+      <div class="card card--png     card--locked"><img src="./assets/lobby/stamp-png.png"     alt=""></div>
+      <div class="card card--japan   card--locked"><img src="./assets/lobby/stamp-japan.png"   alt=""></div>
+    </div>
   </div>
 
   <div class="hint" id="hint"></div>
 </div>
 
+<script src="./js/core/touch.js"></script>
 <script src="./js/core/transition.js"></script>
+<script src="./js/core/parallax.js"></script>
 <script src="./js/screens/lobby.js"></script>
 </body>
 </html>

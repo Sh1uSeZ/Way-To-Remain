@@ -11,7 +11,8 @@ This file records who made what, so nothing here is passed off as my own.
 
 ## Artwork — © [CLIENT NAME], all rights reserved
 
-Every image and the video in `assets/` were drawn and produced by the client.
+Every image and the video in `assets/` were drawn and produced by the client —
+**except `assets/ui/`, which is mine** (see below).
 They are **not** covered by this repository's MIT license and may not be reused,
 redistributed, or adapted without the client's permission.
 
@@ -32,6 +33,17 @@ redistributed, or adapted without the client's permission.
 The client also supplied layout reference images (the files named
 `ตัวอย่างจัดวาง…`). Those are not committed here — they were used only to
 measure where each asset sits, and every position in the CSS is taken from them.
+
+## UI brush panels — mine, MIT
+
+`assets/ui/brush-panel.svg` and `assets/ui/brush-tag.svg` are the dialog box and
+label backgrounds. I generated them from scratch as SVG paths — no stock art, no
+traced or downloaded image — so they carry no third-party licence. They fall under
+this repository's MIT licence along with the rest of the code.
+
+They are a stand-in matched to the client's ink style. If the client would rather
+paint their own brush frames, dropping replacements at those two paths is the only
+change needed.
 
 ## Font — Playpen Sans Thai
 

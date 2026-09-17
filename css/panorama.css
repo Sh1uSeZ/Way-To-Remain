@@ -1,22 +1,22 @@
-/* ฉากกว้างที่เลื่อนด้วยเมาส์ — world, object, hotspot, ป้ายชื่อ */
-.viewport { position: fixed; inset: 0; overflow: hidden; background: var(--void); cursor: crosshair; }
+.viewport { position: fixed; inset: 0; overflow: hidden; background: var(--void); }
+.viewport.is-edge-left  { cursor: w-resize; }
+.viewport.is-edge-right { cursor: e-resize; }
 
 .world {
   position: absolute; top: 50%; left: 0;
-  height: 100vh;
+  height: var(--app-h, 100vh);
   transform: translate3d(0, -50%, 0);
   will-change: transform;
 }
-.world__bg { display: block; height: 100vh; width: auto; }
+.world__bg { display: block; height: var(--app-h, 100vh); width: auto; }
 
-/* --- Clickable objects. Positions measured off the client's layout reference. --- */
+/* Positions measured off the client's layout reference. */
 .obj { position: absolute; pointer-events: none; }
 .obj img { display: block; width: 100%; height: auto; transition: filter .3s var(--ease); }
 
 .obj--coffin   { left:  9.4073%; top: 43.6111%; width: 22.6482%; }
 .obj--villager { left: 49.8109%; top: 15.5556%; width: 32.2068%; }
 
-/* Transparent hit areas sit over the ink of each object. */
 .hotspot {
   position: absolute; padding: 0; border: 0; background: transparent;
   cursor: pointer; z-index: 20;
@@ -26,27 +26,26 @@
 .hotspot--coffin   { left: 10.4162%; top: 46.5741%; width: 20.3279%; height: 43.2407%; }
 .hotspot--villager { left: 66.3556%; top: 44.1667%; width:  3.9849%; height: 50.4630%; }
 
-/* Hover glow on the matching object layer */
-.obj.is-hot img { filter: drop-shadow(0 0 14px rgba(255,255,255,.95)) drop-shadow(0 0 30px rgba(255,255,255,.55)); }
+.obj.is-hot img {
+  filter: drop-shadow(0 0 14px rgba(255,255,255,.95))
+          drop-shadow(0 0 30px rgba(255,255,255,.55));
+}
 
-/* Floating name tag that follows the cursor */
 .tag {
   position: fixed; z-index: 400; pointer-events: none;
   transform: translate(-50%, -160%);
   font-size: clamp(13px, 1.15vw, 19px);
-  color: var(--paper); background: rgba(0,0,0,.72);
-  padding: .4em 1em; border-radius: 999px;
+  color: var(--paper); background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  padding: .75em 1.5em;
   opacity: 0; transition: opacity .2s var(--ease);
 }
 .tag.is-visible { opacity: 1; }
 
-/* --- Back to lobby --- */
 .back {
   position: fixed; left: 2vw; top: 2.5vh; z-index: 300;
   font-family: var(--font); font-size: clamp(13px, 1.1vw, 18px);
-  color: var(--paper); background: rgba(0,0,0,.5);
-  border: 1px solid rgba(217,214,206,.4); border-radius: 999px;
-  padding: .5em 1.3em; cursor: pointer;
+  color: var(--paper); background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  padding: .85em 1.7em; cursor: pointer;
   opacity: .55; transition: opacity .25s var(--ease);
 }
 .back:hover { opacity: 1; }

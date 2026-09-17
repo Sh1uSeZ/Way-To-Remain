@@ -1,10 +1,5 @@
-/* ============================================================
-   ด่านร้อยเอ็ด — ต่อสายระหว่างกล้องฉากกว้าง, hotspot และบทสนทนา
-   ตรรกะทั่วไปอยู่ใน js/core/ บทพูดอยู่ใน data/roiet-dialog.js
-   ============================================================ */
 (function () {
   const D = window.ROIET_DIALOG;
-  const SCENE_W = 3965, SCENE_H = 1080;
 
   let talkedToVillager = false;
 
@@ -17,25 +12,25 @@
   }, onDialogClose);
 
   const panorama = window.createPanorama({
-    world:  document.getElementById('world'),
-    sceneW: SCENE_W,
-    sceneH: SCENE_H,
-    tag:    document.getElementById('tag'),
-    labels: D.tags,
-    isBusy: () => dialog.isOpen
+    world:    document.getElementById('world'),
+    viewport: document.getElementById('viewport'),
+    sceneW:   3965,
+    sceneH:   1080,
+    tag:      document.getElementById('tag'),
+    labels:   D.tags,
+    isBusy:   () => dialog.isOpen
   });
 
   function onHotspot(which) {
-    if (dialog.isOpen) return;
+    if (dialog.isOpen || panorama.wasDragged()) return;
 
     if (which === 'villager') {
       dialog.open(D.villager);
     } else if (which === 'coffin') {
-      // โลงศพยังกดไม่ได้จนกว่าจะคุยกับผู้เฒ่าก่อน
       if (talkedToVillager) window.goTo(D.villager.next);
       else                  dialog.open(D.coffinLocked);
     }
-    panorama.refreshHover();   // ปัดแสงเรืองออกก่อนที่ฉากจะถูกหรี่
+    panorama.refreshHover();
   }
 
   function onDialogClose(script) {

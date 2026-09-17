@@ -1,16 +1,7 @@
-/* ============================================================
-   กล่องบทสนทนา — ใช้ซ้ำได้ทุกด่าน
-   ไม่รู้จักฉากหรือ object ใด ๆ รับแค่ element กับ script เข้ามา
-
-   script = { name, portrait, lines: [] }
-   ============================================================ */
+/* script = { name, portrait, lines: [] } */
 (function () {
   const TYPE_MS = 28;
 
-  /**
-   * @param {object} els  { root, dim, name, text, portrait }
-   * @param {function} [onClose]  เรียกเมื่อพูดจบ พร้อม script ที่เพิ่งจบ
-   */
   window.createDialog = function (els, onClose) {
     let lines = [], index = 0, typer = null, shown = '', script = null;
 
@@ -45,7 +36,7 @@
 
     function advance() {
       if (!api.isOpen) return;
-      // คลิกแรกจบบรรทัดที่กำลังพิมพ์ คลิกถัดไปค่อยไปบรรทัดใหม่
+      // First click finishes the line, the next one moves on.
       if (shown.length < lines[index].length) {
         clearInterval(typer);
         shown = lines[index];

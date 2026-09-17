@@ -1,19 +1,16 @@
-/* Title screen */
 .stage {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width:  min(100vw, calc(100vh * 1980 / 1080));
-  height: min(100vh, calc(100vw * 1080 / 1980));
+  width:  min(100vw, calc(var(--app-h, 100vh) * 1980 / 1080));
+  height: min(var(--app-h, 100vh), calc(100vw * 1080 / 1980));
   container-type: size;
+  overflow: hidden;
 }
 
-.stage__bg {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: fill;
-}
+.stage__cam { position: absolute; inset: 0; will-change: transform; }
 
-/* --- Start button (y ≈ 825 of 1080) --- */
+.stage__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
+
 .start {
   position: absolute; left: 50%; top: 76.4%;
   transform: translate(-50%, -50%) scale(1);
@@ -23,18 +20,15 @@
   background: none; border: 0; padding: .2em .6em;
   cursor: pointer;
   transition: transform .35s var(--ease), text-shadow .35s var(--ease);
-  transform-origin: center;
 }
 .start:hover,
 .start:focus-visible {
-  /* "zoom in just a bit" */
-  transform: translate(-50%, -50%) scale(1.14);
+  transform: translate(-50%, -50%) scale(1.03);
   text-shadow: 0 0 1.6cqw rgba(217,214,206,.9);
   outline: none;
 }
-.start:active { transform: translate(-50%, -50%) scale(1.05); }
+.start:active { transform: translate(-50%, -50%) scale(1.02); }
 
-/* --- Intro video --- */
 .intro {
   position: fixed; inset: 0;
   background: var(--void);
@@ -49,9 +43,9 @@
 .intro__skip {
   position: absolute; right: 3vw; bottom: 3vh;
   font-family: var(--font); font-size: clamp(14px, 1.4vw, 22px);
-  color: var(--paper); background: rgba(0,0,0,.45);
-  border: 1px solid rgba(217,214,206,.45); border-radius: 999px;
-  padding: .5em 1.4em; cursor: pointer;
+  color: var(--paper);
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  padding: .85em 1.8em; cursor: pointer;
   opacity: .65; transition: opacity .25s var(--ease);
 }
 .intro__skip:hover { opacity: 1; }

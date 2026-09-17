@@ -2,11 +2,11 @@
 SCOPE NOTE — READ FIRST
 
 The MIT License below applies ONLY to the source code in this repository:
-the files under css/, js/, data/, and the .html files.
+the files under css/, js/, data/, assets/ui/, and the .html files.
 
-It does NOT apply to the artwork, the intro video, or any other material in
-assets/. Those were supplied by the client who commissioned this project and
-remain their property. They are included here solely to run this game.
+It does NOT apply to the artwork or the intro video in assets/ (other than
+assets/ui/). Those were supplied by the client who commissioned this project
+and remain their property. They are included here solely to run this game.
 See CREDITS.md for the full breakdown.
 
 The font used by this project is not bundled here and is licensed separately

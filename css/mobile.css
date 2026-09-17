@@ -1,0 +1,50 @@
+.rotate { display: none; }
+
+@media (pointer: coarse) and (orientation: portrait) {
+  .rotate {
+    position: fixed; inset: 0; z-index: 9500;
+    display: grid; place-items: center; text-align: center;
+    background: var(--void); color: var(--paper);
+    font-size: clamp(15px, 4.5vw, 22px); line-height: 1.8;
+    padding: 8vw;
+  }
+  .rotate__icon { font-size: 3em; margin-bottom: .4em; }
+}
+
+@media (pointer: coarse) {
+  /* No cursor to follow, and no hover to reveal what is tappable — so every
+     interactive object keeps a soft glow instead. */
+  .tag { display: none !important; }
+
+  .obj img {
+    filter: drop-shadow(0 0 9px rgba(255,255,255,.75));
+    animation: breathe 2.6s ease-in-out infinite;
+  }
+  .obj.is-hot img {
+    filter: drop-shadow(0 0 16px rgba(255,255,255,1))
+            drop-shadow(0 0 34px rgba(255,255,255,.6));
+  }
+  @keyframes breathe { 0%,100% { opacity: .88; } 50% { opacity: 1; } }
+
+  .viewport { touch-action: none; }
+
+  /* Fingers need more than a 4%-wide target. */
+  .hotspot--villager { left: 63.9%; width: 8.9%; }
+  .hotspot--coffin   { left:  9.0%; width: 23.2%; }
+
+  .start { font-size: 5.2cqw; padding: .4em 1em; }
+  .back, .intro__skip { padding: 1em 1.8em; font-size: clamp(14px, 3.2vw, 18px); }
+}
+
+/* Landscape phones are short — give the dialog and portrait room to breathe. */
+@media (max-height: 520px) {
+  .dialog {
+    bottom: 2vh; min-height: 30vh;
+    padding: 4vh 4vw 4vh clamp(96px, 20vw, 150px);
+  }
+  .dialog__portrait { height: clamp(110px, 46vh, 190px); }
+  .dialog__name { font-size: clamp(13px, 2.6vw, 18px); }
+  .dialog__text { font-size: clamp(13px, 2.7vw, 19px); line-height: 1.6; min-height: 3em; }
+  .dialog__next { right: 4vw; bottom: 2vh; }
+  .hint { font-size: clamp(12px, 2.6vw, 16px); padding: .8em 1.6em; }
+}
