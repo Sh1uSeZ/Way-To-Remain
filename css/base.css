@@ -28,6 +28,17 @@ html, body {
 
 img { -webkit-user-drag: none; user-select: none; }
 
+button {
+  font-family: inherit;
+  border: 0;
+  background: none;
+  -webkit-tap-highlight-color: transparent;
+}
+button, button:focus, button:focus-visible, button::-moz-focus-inner {
+  outline: 0;
+  border: 0;
+}
+
 .curtain {
   position: fixed; inset: 0;
   background: var(--void);

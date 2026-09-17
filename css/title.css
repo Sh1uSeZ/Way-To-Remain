@@ -25,7 +25,6 @@
 .start:focus-visible {
   transform: translate(-50%, -50%) scale(1.03);
   text-shadow: 0 0 1.6cqw rgba(217,214,206,.9);
-  outline: none;
 }
 .start:active { transform: translate(-50%, -50%) scale(1.02); }
 

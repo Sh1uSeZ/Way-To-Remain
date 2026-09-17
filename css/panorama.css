@@ -21,7 +21,6 @@
   position: absolute; padding: 0; border: 0; background: transparent;
   cursor: pointer; z-index: 20;
 }
-.hotspot:focus-visible { outline: 2px dashed rgba(217,214,206,.8); outline-offset: 4px; }
 
 .hotspot--coffin   { left: 10.4162%; top: 46.5741%; width: 20.3279%; height: 43.2407%; }
 .hotspot--villager { left: 66.3556%; top: 44.1667%; width:  3.9849%; height: 50.4630%; }

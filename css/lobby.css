@@ -34,7 +34,6 @@
 
 .card--live:hover img,
 .card--live:focus-visible img { filter: drop-shadow(0 0 .9vw rgba(0,0,0,.35)); }
-.card--live:focus-visible { outline: none; }
 .card--live:active { transform: scale(.985); }
 
 /* Stages with no art yet. */
