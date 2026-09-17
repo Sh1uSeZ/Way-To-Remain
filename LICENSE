@@ -1,36 +1,39 @@
-================================================================================
-SCOPE NOTE — READ FIRST
+Ways to Remain — Copyright Notice
 
-The MIT License below applies ONLY to the source code in this repository:
-the files under css/, js/, data/, assets/ui/, and the .html files.
+This project was produced on commission. The repository is public so the
+client and their reviewers can read it and play the published build.
 
-It does NOT apply to the artwork or the intro video in assets/ (other than
-assets/ui/). Those were supplied by the client who commissioned this project
-and remain their property. They are included here solely to run this game.
-See CREDITS.md for the full breakdown.
+IT IS NOT OPEN SOURCE. No licence is granted by this file.
 
-The font used by this project is not bundled here and is licensed separately
-under the SIL Open Font License 1.1. See CREDITS.md.
-================================================================================
+--------------------------------------------------------------------------
+ARTWORK AND VIDEO
 
-MIT License
+Every image and video under assets/, except assets/ui/, was created by the
+client who commissioned this project and remains their property.
+All rights reserved.
 
-Copyright (c) 2026 Sh1uSeZ
+--------------------------------------------------------------------------
+CODE AND UI ASSETS
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Everything else — css/, js/, data/, assets/ui/, and the .html files — was
+written for this commission. Ownership as between the developer and the
+client is governed by the commission agreement and has not been settled in
+writing in this repository, so no grant is offered here either.
+All rights reserved.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+--------------------------------------------------------------------------
+WHAT YOU MAY DO
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Read this source and play the published site.
+
+WHAT YOU MAY NOT DO
+
+Copy, modify, redistribute, republish, or reuse any part of this repository,
+in whole or in part, in any medium, without written permission from the
+copyright holders.
+
+--------------------------------------------------------------------------
+
+Third-party material used by this project is listed in CREDITS.md, including
+the Playpen Sans Thai font, which carries its own separate licence and is not
+covered by this notice.

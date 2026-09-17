@@ -13,8 +13,8 @@ This file records who made what, so nothing here is passed off as my own.
 
 Every image and the video in `assets/` were drawn and produced by the client —
 **except `assets/ui/`, which is mine** (see below).
-They are **not** covered by this repository's MIT license and may not be reused,
-redistributed, or adapted without the client's permission.
+They may not be reused, redistributed, or adapted without the client's
+permission. See [LICENSE](LICENSE).
 
 | File | What it is |
 |---|---|
@@ -34,16 +34,17 @@ The client also supplied layout reference images (the files named
 `ตัวอย่างจัดวาง…`). Those are not committed here — they were used only to
 measure where each asset sits, and every position in the CSS is taken from them.
 
-## UI brush panels — mine, MIT
+## UI brush panels — mine
 
 `assets/ui/brush-panel.svg` and `assets/ui/brush-tag.svg` are the dialog box and
 label backgrounds. I generated them from scratch as SVG paths — no stock art, no
-traced or downloaded image — so they carry no third-party licence. They fall under
-this repository's MIT licence along with the rest of the code.
+traced or downloaded image — so they carry no third-party licence.
 
 They are a stand-in matched to the client's ink style. If the client would rather
 paint their own brush frames, dropping replacements at those two paths is the only
 change needed.
+
+Like the rest of the code, no licence is granted for them — see [LICENSE](LICENSE).
 
 ## Font — Playpen Sans Thai
 
@@ -58,10 +59,13 @@ The Thai lines in `data/roiet-dialog.js` are **placeholder text I wrote** to get
 the dialog system working. They are not the client's script and are not final —
 they exist to be replaced. Do not treat them as the game's writing.
 
-## Code — mine
+## Code
 
 Everything in `css/`, `js/`, `data/` and the `.html` files was written by me,
-with assistance from Claude (Anthropic). Licensed under MIT — see [LICENSE](LICENSE).
+with assistance from Claude (Anthropic).
 
-> Note: because this was commissioned, ownership of the code may sit with the
-> client depending on the contract. Confirm before relying on the MIT grant.
+> **This repo is public but not open source.** Because the work was commissioned,
+> ownership of the code may sit with the client depending on the agreement, so no
+> licence is offered until that is settled. If the client is happy for the code to
+> be released, MIT would be the natural choice — that is a conversation to have
+> with them, not a decision to make unilaterally. See [LICENSE](LICENSE).
