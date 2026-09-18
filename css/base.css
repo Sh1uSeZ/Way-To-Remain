@@ -8,6 +8,7 @@
   --ink:   #15130f;
   --paper: #d9d6ce;
   --void:  #000000;
+  --accent:#a84848;   /* แดงที่ลูกค้าใช้ในตั๋วกับตราวีซ่าอยู่แล้ว */
   --ease:  cubic-bezier(.22,.61,.36,1);
   --font:  'Playpen Sans Thai', system-ui, sans-serif;
 }

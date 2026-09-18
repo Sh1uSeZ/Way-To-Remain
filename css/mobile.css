@@ -28,9 +28,7 @@
 
   .viewport { touch-action: none; }
 
-  /* Fingers need more than a 4%-wide target. */
-  .hotspot--villager { left: 63.9%; width: 8.9%; }
-  .hotspot--coffin   { left:  9.0%; width: 23.2%; }
+  /* ขยายพื้นที่กดของแต่ละด่านอยู่ใน css/stage-<ด่าน>.css */
 
   .start { font-size: 5.2cqw; padding: .4em 1em; }
   .back, .intro__skip { padding: 1em 1.8em; font-size: clamp(14px, 3.2vw, 18px); }

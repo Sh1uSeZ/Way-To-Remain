@@ -1,0 +1,13 @@
+/* ตำแหน่งวัดจากไฟล์ "ตัวอย่าง" ของลูกค้า ฉาก 3965x1080 */
+.obj--child  { left: 18.3607%; top: 60.4630%; width:  6.9357%; }
+.obj--monk   { left: 55.7125%; top: 30.6481%; width:  5.1955%; }
+.obj--corpse { left: 63.8335%; top: 50.5556%; width: 27.3140%; }
+
+.hotspot--child  { left: 19.1173%; top: 65.6481%; width:  5.4981%; height: 28.4259%; }
+.hotspot--monk   { left: 56.3178%; top: 33.6111%; width:  3.9092%; height: 53.2407%; }
+.hotspot--corpse { left: 65.0694%; top: 55.0926%; width: 25.5485%; height: 40.2778%; }
+
+@media (pointer: coarse) {
+  .hotspot--child { left: 17.6%; width:  8.5%; }
+  .hotspot--monk  { left: 54.3%; width:  8.0%; }
+}

@@ -1,0 +1,11 @@
+/* ตำแหน่งวัดจากไฟล์ "ตัวอย่างจัดวาง" ของลูกค้า ฉาก 3965x1080 */
+.obj--coffin   { left:  9.4073%; top: 43.6111%; width: 22.6482%; }
+.obj--villager { left: 49.8109%; top: 15.5556%; width: 32.2068%; }
+
+.hotspot--coffin   { left: 10.4162%; top: 46.5741%; width: 20.3279%; height: 43.2407%; }
+.hotspot--villager { left: 66.3556%; top: 44.1667%; width:  3.9849%; height: 50.4630%; }
+
+@media (pointer: coarse) {
+  .hotspot--villager { left: 63.9%; width: 8.9%; }
+  .hotspot--coffin   { left:  9.0%; width: 23.2%; }
+}

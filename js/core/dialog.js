@@ -1,6 +1,10 @@
-/* script = { name, portrait, lines: [] } */
+/* บทสนทนาสองฝั่งแบบ Persona
+   script = {
+     cast:  { key: { name, portrait, side: 'left'|'right' } },
+     lines: [ { who: 'key', text: '...' } ]      // who: null = ไม่มีคนพูด
+   } */
 (function () {
-  const TYPE_MS = 28;
+  const TYPE_MS = 26;
 
   window.createDialog = function (els, onClose) {
     let lines = [], index = 0, typer = null, shown = '', script = null;
@@ -9,18 +13,50 @@
 
     function open(next) {
       script = next;
-      lines  = next.lines;
-      index  = 0;
+      lines = next.lines;
+      index = 0;
       api.isOpen = true;
-
-      els.name.textContent = next.name || '';
-      if (next.portrait) { els.portrait.src = next.portrait; els.portrait.hidden = false; }
-      else               { els.portrait.hidden = true; }
-
       els.dim.classList.add('is-open');
       els.root.classList.add('is-open');
       if (window.Sound) window.Sound.play('thud');
-      type(lines[0]);
+      show(0);
+    }
+
+    /* วางตัวละครเข้าที่ แล้วไฮไลต์เฉพาะฝั่งที่กำลังพูด */
+    function cast(who) {
+      const roles = (script.cast) || {};
+      ['left', 'right'].forEach((side) => {
+        const el = els[side];
+        if (!el) return;
+        const key = Object.keys(roles).find((k) => roles[k].side === side);
+        const role = key ? roles[key] : null;
+
+        if (!role || !role.portrait) {
+          el.classList.remove('is-present', 'is-talking');
+          return;
+        }
+        if (el.dataset.src !== role.portrait) {
+          el.src = role.portrait;
+          el.dataset.src = role.portrait;
+        }
+        el.classList.add('is-present');
+        el.classList.toggle('is-talking', key === who);
+      });
+
+      const role = roles[who];
+      els.name.textContent = '';
+      if (role && role.name) {
+        const s = document.createElement('span');
+        s.textContent = role.name;
+        els.name.appendChild(s);
+      }
+      els.name.classList.toggle('is-hidden', !(role && role.name));
+    }
+
+    function show(i) {
+      const line = lines[i];
+      cast(line.who);
+      type(line.text);
     }
 
     function type(text) {
@@ -31,24 +67,22 @@
       typer = setInterval(() => {
         shown += text[i++];
         els.text.textContent = shown;
-        // ทุกตัวอักษรจะรัวเกินไป เล่นทุก 4 ตัวพอ
-        if (window.Sound && i % 4 === 0) window.Sound.play('blip');
         if (i >= text.length) clearInterval(typer);
       }, TYPE_MS);
     }
 
     function advance() {
       if (!api.isOpen) return;
-      // First click finishes the line, the next one moves on.
-      if (shown.length < lines[index].length) {
+      // คลิกแรกจบบรรทัดที่กำลังพิมพ์ คลิกถัดไปค่อยไปบรรทัดใหม่
+      if (shown.length < lines[index].text.length) {
         clearInterval(typer);
-        shown = lines[index];
+        shown = lines[index].text;
         els.text.textContent = shown;
         return;
       }
       index++;
       if (window.Sound) window.Sound.play('select');
-      if (index < lines.length) { type(lines[index]); return; }
+      if (index < lines.length) { show(index); return; }
       close();
     }
 
@@ -58,6 +92,7 @@
       clearInterval(typer);
       els.dim.classList.remove('is-open');
       els.root.classList.remove('is-open');
+      ['left', 'right'].forEach((s) => els[s] && els[s].classList.remove('is-present', 'is-talking'));
       if (onClose) onClose(script);
     }
 

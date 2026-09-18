@@ -29,7 +29,14 @@ permission. See [LICENSE](LICENSE).
 | `assets/roiet/scene.png` | Roi Et riverside panorama (3965 × 1080) |
 | `assets/roiet/coffin.png` | Coffin / bier object layer |
 | `assets/roiet/villager.png` | Villager object layer |
-| `assets/roiet/villager-portrait.png` | Villager portrait for the dialog box |
+| `assets/chars/villager-portrait.png` | Villager portrait for the dialog box |
+| `assets/bangkok/scene.png` | Bangkok temple panorama (3965 × 1080) |
+| `assets/bangkok/child.png` | Running child object layer |
+| `assets/bangkok/temple-man.png` | Temple man object layer |
+| `assets/bangkok/corpse.png` | Bier, corpse and offering tables |
+| `assets/chars/child-portrait.png` | Child portrait for the dialog box |
+| `assets/chars/temple-man-portrait.png` | Temple man portrait for the dialog box |
+| `assets/chars/hero-portrait.png` | The protagonist — downscaled from the client's 2640 × 6160 original |
 
 The site is published at https://sh1usez.github.io/Way-To-Remain/, so these files
 are served publicly. GitHub Pages cannot be access-restricted on a free or Pro
@@ -75,6 +82,14 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 
 Background music is used on the Roi Et stage only. The title screen and lobby have
 sound effects but no music, by the client's instruction.
+
+## Dialog box styling — inspired by Persona 5, built from scratch
+
+The dialog box imitates the *look* of Persona 5: portraits either side, an angled
+black panel, a skewed name tag. **No Persona 5 files are used.** The shapes are CSS
+`clip-path` polygons and the accent `#a84848` is sampled from the client's own ticket
+and visa artwork. Persona 5's actual assets are Atlus copyright and cannot be shipped
+in a public repository.
 
 ## Font — Playpen Sans Thai
 

@@ -1,50 +1,82 @@
 .dim {
   position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,.45);
+  background: rgba(0,0,0,.55);
   opacity: 0; pointer-events: none;
   transition: opacity .35s var(--ease);
 }
 .dim.is-open { opacity: 1; pointer-events: auto; cursor: pointer; }
 
+/* --- ตัวละครสองฝั่ง ฝั่งที่พูดจะสว่างและยกขึ้น อีกฝั่งหรี่ลง --- */
+.vn { position: fixed; inset: 0; z-index: 560; pointer-events: none; }
+
+.vn__char {
+  position: absolute; bottom: 0;
+  height: min(74vh, 620px); width: auto;
+  opacity: 0;
+  transition: opacity .3s var(--ease), transform .3s var(--ease), filter .3s var(--ease);
+  filter: brightness(.55) contrast(.9);
+  transform: translateY(6%) scale(.96);
+}
+.vn__char--left  { left: clamp(-70px, -4vw, 0px); }
+.vn__char--right { right: clamp(-70px, -4vw, 0px); }
+
+.vn__char.is-present { opacity: 1; }
+.vn__char.is-talking { filter: none; transform: translateY(0) scale(1); }
+
+/* --- กล่องข้อความทรงเหลี่ยม เอียงเล็กน้อยแบบ Persona --- */
 .dialog {
   position: fixed; z-index: 600;
-  left: 50%; bottom: 3.5vh;
-  transform: translate(-50%, 18px);
-  width: min(1180px, 92vw);
-  min-height: 24vh;
-  background: url('../assets/ui/brush-panel.svg') center/100% 100% no-repeat;
-  padding: 4.2vh 4vw 4.2vh clamp(155px, 15vw, 265px);
-  color: var(--paper);
+  left: 50%; bottom: 5vh;
+  transform: translate(-50%, 20px);
+  width: min(1180px, 90vw);
+  min-height: 22vh;
+  padding: 5.4vh 5vw 3vh 5vw;
+  color: #fff;
   opacity: 0; pointer-events: none;
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
+  transition: opacity .28s var(--ease), transform .28s var(--ease);
 }
 .dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
 
-.dialog__portrait {
-  position: absolute; left: clamp(-14px, -1vw, 0px); bottom: 1.2vh;
-  height: clamp(210px, 33vh, 420px);
-  width: auto;
-  pointer-events: none;
-  filter: drop-shadow(0 6px 18px rgba(0,0,0,.6));
+/* รูปทรงเหลี่ยมอยู่ในลูกของกล่อง ไม่ใช่ตัวกล่องเอง
+   เพราะ clip-path กินลูกทุกตัว ป้ายชื่อที่ล้นออกมาด้านบนจะโดนตัดไปด้วย */
+.dialog__box {
+  position: absolute; inset: 0; z-index: 0;
+  background: #0b0a09;
+  clip-path: polygon(1.2% 0, 100% 2.6%, 98.6% 100%, 0 95%);
 }
-.dialog__portrait[hidden] { display: none; }
+.dialog__name, .dialog__text, .dialog__next { position: relative; z-index: 1; }
 
+/* ป้ายชื่อเอียงสวนทางกับกล่อง */
 .dialog__name {
-  font-size: clamp(15px, 1.35vw, 22px); font-weight: 700;
-  color: #fff; margin-bottom: .45em;
+  position: absolute; left: 3.2vw; top: -1.5em;
+  transform: skewX(-11deg);
+  background: var(--accent);
+  color: #fff;
+  font-size: clamp(14px, 1.3vw, 21px); font-weight: 800;
+  padding: .3em 1.4em;
+  box-shadow: 4px 4px 0 #0b0a09;
 }
-.dialog__name:empty { display: none; }
+.dialog__name > span { display: inline-block; transform: skewX(11deg); }
+.dialog__name:empty, .dialog__name.is-hidden { display: none; }
 
 .dialog__text {
   font-size: clamp(15px, 1.35vw, 23px);
-  line-height: 1.75;
+  font-weight: 600;
+  line-height: 1.7;
   min-height: 3.4em;
   white-space: pre-wrap;
 }
 
 .dialog__next {
-  position: absolute; right: 3vw; bottom: 2.6vh;
-  font-size: clamp(13px, 1.1vw, 18px); opacity: .6;
+  position: absolute; right: 3.4vw; bottom: 2vh;
+  font-size: clamp(13px, 1.1vw, 18px);
+  color: var(--accent);
   animation: nudge 1.4s ease-in-out infinite;
 }
-@keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+@keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+@media (max-height: 520px) {
+  .dialog { bottom: 2vh; min-height: 30vh; padding: 5vh 4vw 3vh; }
+  .dialog__text { font-size: clamp(13px, 2.7vw, 19px); line-height: 1.55; min-height: 3em; }
+  .vn__char { height: 62vh; }
+}

@@ -1,10 +1,9 @@
 (function () {
-  const D = window.ROIET_DIALOG;
+  const D = window.BANGKOK_DIALOG;
 
-  let talkedToVillager = false;
-
-  Sound.bgm('bgm-roiet-khaen.mp3');
-  Sound.amb('amb-roiet.mp3');
+  /* คนในวัดจะไม่พูดด้วยจนกว่าจะไปฟังเด็กก่อน */
+  let heardChild = false;
+  let heardMonk  = false;
 
   const dialog = window.createDialog({
     root:  document.getElementById('dialog'),
@@ -25,22 +24,25 @@
     isBusy:   () => dialog.isOpen
   });
 
+  function say(script) {
+    dialog.open(Object.assign({ cast: D.cast }, script));
+  }
+
   function onHotspot(which) {
     if (dialog.isOpen || panorama.wasDragged()) return;
 
-    if (which === 'villager') {
-      dialog.open(Object.assign({ cast: D.cast }, D.villager));
-    } else if (which === 'coffin') {
-      if (talkedToVillager) window.goTo(D.villager.next);
-      else dialog.open(Object.assign({ cast: D.cast }, D.coffinLocked));
+    if (which === 'child')       say(D.child);
+    else if (which === 'monk')   say(heardChild ? D.monk : D.monkLocked);
+    else if (which === 'corpse') {
+      if (heardChild && heardMonk) window.goTo('./bangkok-ritual.html');
+      else say(D.corpseLocked);
     }
     panorama.refreshHover();
   }
 
   function onDialogClose(script) {
-    if (script.lines !== D.villager.lines) return;
-    talkedToVillager = true;
-    window.goTo(D.villager.next, 700);
+    if (script.lines === D.child.lines) heardChild = true;
+    if (script.lines === D.monk.lines)  heardMonk  = true;
   }
 
   document.querySelectorAll('.hotspot').forEach((hs) => {
