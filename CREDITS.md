@@ -83,22 +83,27 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 Background music is used on the Roi Et stage only. The title screen and lobby have
 sound effects but no music, by the client's instruction.
 
-## Dialog box styling — Persona 5 derived, no Atlus files shipped
+## Dialog box — Persona 5 artwork, supplied by the client
 
-The dialog box imitates Persona 5: portraits either side, an angled black panel with a
-white inner rim, a skewed name tag. The accent `#a84848` is sampled from the client's
-own ticket and visa artwork.
+`assets/ui/dialog-p5.png` is a Persona 5 dialog-box graphic. **The client supplied this
+file and asked for it to be used directly**, after being told it could not be sourced on
+their behalf.
 
-**No Persona 5 image files are in this repository.** The client supplied a Persona 5
-dialog-shape PNG as a reference; rather than ship it, the outline was traced to a
-21-point CSS `clip-path` polygon. That keeps the repo free of a file whose provenance
-we cannot establish, and a polygon also scales to any dialog size and recolours, which
-a fixed-size PNG cannot.
+> **This is copyrighted material.** Persona 5's UI artwork belongs to Atlus. It is being
+> served from a public repository and a public site. This is the client's decision, made
+> with the risk stated, and it is recorded here rather than left undocumented.
+>
+> If it needs to be removed later: it is referenced once, as the `background` of
+> `.dialog` in `css/dialog.css`. Swapping it for an original graphic is a one-line
+> change — the box is already locked to the artwork's 1223:344 aspect, so any
+> replacement at that ratio drops straight in.
 
-> **Residual risk, stated plainly:** a traced outline is still derived from the source.
-> Simple geometric shapes carry thin copyright protection, but this is not the same as
-> an independently invented shape. If the client wants no Persona 5 lineage at all, the
-> polygon in `css/dialog.css` is one line to swap for an original shape.
+The surrounding styling is not from Persona 5: the accent `#a84848` is sampled from the
+client's own ticket and visa artwork, and the layout, portrait swapping and text
+positioning were written for this project.
+
+`assets/ui/brush-tag.svg` is still mine — original SVG, generated from scratch, used for
+the small labels and buttons. See [LICENSE](LICENSE).
 
 ## Font — Playpen Sans Thai
 

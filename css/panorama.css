@@ -11,6 +11,10 @@
 .world__bg { display: block; height: var(--app-h, 100vh); width: auto; }
 
 
+/* ตำแหน่ง .obj--* / .hotspot--* ของแต่ละด่านอยู่ใน css/stage-<ด่าน>.css */
+.obj { position: absolute; pointer-events: none; }
+.obj img { display: block; width: 100%; height: auto; transition: filter .3s var(--ease); }
+
 .hotspot {
   position: absolute; padding: 0; border: 0; background: transparent;
   cursor: pointer; z-index: 20;

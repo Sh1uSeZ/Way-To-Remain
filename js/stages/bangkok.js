@@ -10,8 +10,7 @@
     dim:   document.getElementById('dim'),
     name:  document.getElementById('dialogName'),
     text:  document.getElementById('dialogText'),
-    left:  document.getElementById('charLeft'),
-    right: document.getElementById('charRight')
+    char:  document.getElementById('charSlot')
   }, onDialogClose);
 
   const panorama = window.createPanorama({

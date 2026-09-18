@@ -3,9 +3,9 @@
 window.BANGKOK_DIALOG = {
 
   cast: {
-    child: { name: 'เด็กน้อย',  portrait: '../assets/chars/child-portrait.png',      side: 'left'  },
-    monk:  { name: 'คนในวัด',   portrait: '../assets/chars/temple-man-portrait.png', side: 'left'  },
-    hero:  { name: 'เรา',       portrait: '../assets/chars/hero-portrait.png',       side: 'right' }
+    child: { name: 'เด็กน้อย',  portrait: '../assets/chars/child-portrait.png' },
+    monk:  { name: 'คนในวัด',   portrait: '../assets/chars/temple-man-portrait.png' },
+    hero:  { name: 'เรา',       portrait: '../assets/chars/hero-portrait.png' }
   },
 
   child: {

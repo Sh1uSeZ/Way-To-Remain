@@ -1,6 +1,6 @@
 /* บทสนทนาสองฝั่งแบบ Persona
    script = {
-     cast:  { key: { name, portrait, side: 'left'|'right' } },
+     cast:  { key: { name, portrait } },
      lines: [ { who: 'key', text: '...' } ]      // who: null = ไม่มีคนพูด
    } */
 (function () {
@@ -22,34 +22,31 @@
       show(0);
     }
 
-    /* วางตัวละครเข้าที่ แล้วไฮไลต์เฉพาะฝั่งที่กำลังพูด */
+    /* Persona วางตัวละครไว้ฝั่งเดียว พอเปลี่ยนคนพูดก็สลับตัวตรงนั้นเลย
+       ไม่ได้โชว์สองคนพร้อมกัน */
     function cast(who) {
-      const roles = (script.cast) || {};
-      ['left', 'right'].forEach((side) => {
-        const el = els[side];
-        if (!el) return;
-        const key = Object.keys(roles).find((k) => roles[k].side === side);
-        const role = key ? roles[key] : null;
+      const role = ((script.cast) || {})[who];
+      const el = els.char;
 
+      if (el) {
         if (!role || !role.portrait) {
-          el.classList.remove('is-present', 'is-talking');
-          return;
+          el.classList.remove('is-present', 'is-swapping');
+        } else {
+          const changed = el.dataset.src !== role.portrait;
+          if (changed) {
+            el.src = role.portrait;
+            el.dataset.src = role.portrait;
+          }
+          el.classList.add('is-present');
+          if (changed) {
+            el.classList.remove('is-swapping');
+            void el.offsetWidth;          // บังคับให้ animation เริ่มใหม่
+            el.classList.add('is-swapping');
+          }
         }
-        if (el.dataset.src !== role.portrait) {
-          el.src = role.portrait;
-          el.dataset.src = role.portrait;
-        }
-        el.classList.add('is-present');
-        el.classList.toggle('is-talking', key === who);
-      });
-
-      const role = roles[who];
-      els.name.textContent = '';
-      if (role && role.name) {
-        const s = document.createElement('span');
-        s.textContent = role.name;
-        els.name.appendChild(s);
       }
+
+      els.name.textContent = (role && role.name) || '';
       els.name.classList.toggle('is-hidden', !(role && role.name));
     }
 
@@ -92,7 +89,7 @@
       clearInterval(typer);
       els.dim.classList.remove('is-open');
       els.root.classList.remove('is-open');
-      ['left', 'right'].forEach((s) => els[s] && els[s].classList.remove('is-present', 'is-talking'));
+      if (els.char) els.char.classList.remove('is-present', 'is-swapping');
       if (onClose) onClose(script);
     }
 

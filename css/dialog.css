@@ -6,84 +6,68 @@
 }
 .dim.is-open { opacity: 1; pointer-events: auto; cursor: pointer; }
 
-/* --- ตัวละครสองฝั่ง ฝั่งที่พูดจะสว่างและยกขึ้น อีกฝั่งหรี่ลง --- */
+/* --- ตัวละครทีละคน อยู่ฝั่งเดียวกันเสมอ สลับตัวเมื่อเปลี่ยนคนพูด --- */
 .vn { position: fixed; inset: 0; z-index: 560; pointer-events: none; }
 
 .vn__char {
-  position: absolute; bottom: 0;
-  height: min(74vh, 620px); width: auto;
+  position: absolute; bottom: 0; left: clamp(-50px, -3vw, 0px);
+  height: min(78vh, 700px); width: auto;
   opacity: 0;
-  transition: opacity .3s var(--ease), transform .3s var(--ease), filter .3s var(--ease);
-  filter: brightness(.55) contrast(.9);
-  transform: translateY(6%) scale(.96);
+  transform: translateY(5%) scale(.97);
+  transition: opacity .2s var(--ease), transform .2s var(--ease);
 }
-.vn__char--left  { left: clamp(-70px, -4vw, 0px); }
-.vn__char--right { right: clamp(-70px, -4vw, 0px); }
+.vn__char.is-present { opacity: 1; transform: none; }
+.vn__char.is-swapping { animation: charIn .26s var(--ease); }
+@keyframes charIn {
+  from { opacity: 0; transform: translateX(-3%) translateY(3%) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
 
-.vn__char.is-present { opacity: 1; }
-.vn__char.is-talking { filter: none; transform: translateY(0) scale(1); }
-
-/* --- กล่องข้อความทรงเหลี่ยม เอียงเล็กน้อยแบบ Persona --- */
+/* --- กล่องข้อความ ใช้ภาพจากลูกค้า ล็อกสัดส่วนตามภาพจะได้ไม่ยืดเพี้ยน --- */
 .dialog {
   position: fixed; z-index: 600;
-  left: 50%; bottom: 5vh;
+  left: 50%; bottom: 4vh;
   transform: translate(-50%, 20px);
-  width: min(1040px, 82vw);
-  min-height: 34vh;
-  padding: 11vh 12vw 9vh 21vw;
+  width: min(1080px, 88vw);
+  aspect-ratio: 1223 / 344;
+  background: url('../assets/ui/dialog-p5.png') center/100% 100% no-repeat;
   color: #fff;
   opacity: 0; pointer-events: none;
   transition: opacity .28s var(--ease), transform .28s var(--ease);
 }
 .dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
 
-/* รูปทรงเหลี่ยมอยู่ในลูกของกล่อง ไม่ใช่ตัวกล่องเอง
-   เพราะ clip-path กินลูกทุกตัว ป้ายชื่อที่ล้นออกมาด้านบนจะโดนตัดไปด้วย */
-.dialog__box {
-  position: absolute; inset: 0; z-index: 0;
-  background: #0b0a09;
-  clip-path: polygon(31.15% 0%, 35.57% 24.42%, 22.49% 32.85%, 21.67% 34.01%, 90.35% 20.06%, 87.33% 28.20%, 87.90% 43.90%, 93.05% 27.91%, 99.92% 54.07%, 88.96% 69.19%, 90.19% 99.71%, 17.83% 78.49%, 17.01% 78.49%, 14.88% 87.21%, 8.42% 69.77%, 6.62% 75.29%, 0% 52.03%, 0% 49.13%, 1.39% 50.29%, 8.50% 35.76%, 7.28% 26.74%);
-}
-/* ขอบขาวคั่นกลางแบบเดียวกับต้นฉบับ ใช้รูปทรงเดิมย่อเข้ามา */
-.dialog__box::before, .dialog__box::after {
-  content: ''; position: absolute; clip-path: inherit;
-}
-.dialog__box::before { inset: 4px;  background: #fff; }
-.dialog__box::after  { inset: 10px; background: #0b0a09; }
-.dialog__name, .dialog__text, .dialog__next { position: relative; z-index: 1; }
-
-/* ป้ายชื่อเอียงสวนทางกับกล่อง */
+/* ตำแหน่งวัดจากภาพจริง: แถบชื่อด้านบนซ้าย ตัวข้อความอยู่กลางลำตัวกล่อง */
 .dialog__name {
-  position: absolute; left: 18vw; top: 2.2vh;
-  transform: skewX(-11deg);
-  background: var(--accent);
-  color: #fff;
-  font-size: clamp(14px, 1.3vw, 21px); font-weight: 800;
-  padding: .3em 1.4em;
-  box-shadow: 4px 4px 0 #0b0a09;
+  position: absolute; left: 20.6%; top: 9.5%;
+  width: 26%; height: 17%;
+  display: flex; align-items: center;
+  transform: rotate(-4.2deg);
+  font-size: clamp(11px, 1.1vw, 18px); font-weight: 800;
+  /* แถบชื่อในภาพเป็นพื้นสีขาว ตัวอักษรต้องเป็นสีเข้ม */
+  color: #0b0a09; white-space: nowrap;
 }
-.dialog__name > span { display: inline-block; transform: skewX(11deg); }
-.dialog__name:empty, .dialog__name.is-hidden { display: none; }
+.dialog__name.is-hidden { display: none; }
 
 .dialog__text {
-  font-size: clamp(15px, 1.35vw, 23px);
+  position: absolute;
+  left: 20%; right: 20.5%; top: 38%; bottom: 16%;
+  display: flex; align-items: center;
+  font-size: clamp(12px, 1.25vw, 21px);
   font-weight: 600;
-  line-height: 1.7;
-  min-height: 3.4em;
+  line-height: 1.55;
   white-space: pre-wrap;
 }
 
 .dialog__next {
-  position: absolute; right: 3.4vw; bottom: 2vh;
-  font-size: clamp(13px, 1.1vw, 18px);
+  position: absolute; right: 21%; bottom: 20%;
+  font-size: clamp(11px, 1vw, 16px);
   color: var(--accent);
   animation: nudge 1.4s ease-in-out infinite;
 }
 @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
-@media (max-height: 520px) {
-  /* จอเตี้ยต้องคงระยะซ้ายไว้ ไม่งั้นข้อความไปทับปลายลูกศร */
-  .dialog { bottom: 2vh; min-height: 46vh; padding: 13vh 11vw 8vh 22vw; }
-  .dialog__text { font-size: clamp(13px, 2.7vw, 19px); line-height: 1.55; min-height: 3em; }
-  .vn__char { height: 62vh; }
+@media (max-height: 560px) {
+  .dialog { bottom: 2vh; width: min(760px, 78vw); }
+  .vn__char { height: 72vh; }
 }

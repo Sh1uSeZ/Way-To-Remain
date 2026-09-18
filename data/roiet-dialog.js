@@ -3,8 +3,8 @@
 window.ROIET_DIALOG = {
 
   cast: {
-    npc:  { name: 'ผู้เฒ่าคำ', portrait: '../assets/chars/villager-portrait.png', side: 'left'  },
-    hero: { name: 'เรา',       portrait: '../assets/chars/hero-portrait.png',     side: 'right' }
+    npc:  { name: 'ผู้เฒ่าคำ', portrait: '../assets/chars/villager-portrait.png' },
+    hero: { name: 'เรา',       portrait: '../assets/chars/hero-portrait.png' }
   },
 
   villager: {
