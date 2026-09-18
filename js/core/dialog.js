@@ -53,6 +53,10 @@
     function show(i) {
       const line = lines[i];
       cast(line.who);
+      // ยิง animation ใหม่ทุกบรรทัด ต้องถอดคลาสแล้วบังคับ reflow ก่อน ไม่งั้นมันไม่เล่นซ้ำ
+      els.root.classList.remove('is-speaking');
+      void els.root.offsetWidth;
+      els.root.classList.add('is-speaking');
       type(line.text);
     }
 
@@ -88,7 +92,7 @@
       api.isOpen = false;
       clearInterval(typer);
       els.dim.classList.remove('is-open');
-      els.root.classList.remove('is-open');
+      els.root.classList.remove('is-open', 'is-speaking');
       if (els.char) els.char.classList.remove('is-present', 'is-swapping');
       if (onClose) onClose(script);
     }

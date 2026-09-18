@@ -10,8 +10,8 @@
 .vn { position: fixed; inset: 0; z-index: 560; pointer-events: none; }
 
 .vn__char {
-  position: absolute; bottom: 0; left: clamp(-50px, -3vw, 0px);
-  height: min(78vh, 700px); width: auto;
+  position: absolute; bottom: -8vh; left: clamp(-60px, -4vw, 0px);
+  height: min(96vh, 860px); width: auto;
   opacity: 0;
   transform: translateY(5%) scale(.97);
   transition: opacity .2s var(--ease), transform .2s var(--ease);
@@ -33,7 +33,14 @@
   background: url('../assets/ui/dialog-p5.png') center/100% 100% no-repeat;
   color: #fff;
   opacity: 0; pointer-events: none;
+  transform-origin: left center;
   transition: opacity .28s var(--ease), transform .28s var(--ease);
+}
+/* เล่นใหม่ทุกครั้งที่มีคนพูด กล่องจะยืดออกจากซ้ายไปขวาเหมือนพุ่งออกจากตัวละคร */
+.dialog.is-speaking { animation: boxOut .3s var(--ease); }
+@keyframes boxOut {
+  from { opacity: .25; transform: translate(-50%, 0) scaleX(.4); }
+  to   { opacity: 1;   transform: translate(-50%, 0) scaleX(1); }
 }
 .dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
 
@@ -42,8 +49,8 @@
   position: absolute; left: 20.6%; top: 9.5%;
   width: 26%; height: 17%;
   display: flex; align-items: center;
-  transform: rotate(-4.2deg);
-  font-size: clamp(11px, 1.1vw, 18px); font-weight: 800;
+  transform: rotate(-3.82deg);
+  font-size: clamp(10px, 1.25vw, 19px); font-weight: 800;
   /* แถบชื่อในภาพเป็นพื้นสีขาว ตัวอักษรต้องเป็นสีเข้ม */
   color: #0b0a09; white-space: nowrap;
 }
@@ -51,17 +58,18 @@
 
 .dialog__text {
   position: absolute;
-  left: 20%; right: 20.5%; top: 38%; bottom: 16%;
+  left: 20.2%; right: 20.2%; top: 34%; bottom: 13%;
   display: flex; align-items: center;
-  font-size: clamp(12px, 1.25vw, 21px);
+  transform: rotate(2.19deg);
+  font-size: clamp(12px, 1.65vw, 23px);
   font-weight: 600;
-  line-height: 1.55;
+  line-height: 1.45;
   white-space: pre-wrap;
 }
 
 .dialog__next {
   position: absolute; right: 21%; bottom: 20%;
-  font-size: clamp(11px, 1vw, 16px);
+  font-size: clamp(9px, 1vw, 15px);
   color: var(--accent);
   animation: nudge 1.4s ease-in-out infinite;
 }
@@ -69,5 +77,5 @@
 
 @media (max-height: 560px) {
   .dialog { bottom: 2vh; width: min(760px, 78vw); }
-  .vn__char { height: 72vh; }
+  .vn__char { height: 88vh; bottom: -6vh; }
 }
