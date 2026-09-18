@@ -5,6 +5,8 @@
     amb: 0.25,   // เสียงธรรมชาติ
     sfx: 0.55
   };
+  /* เสียงบางตัวดังกว่าตัวอื่นโดยธรรมชาติ ลดเฉพาะตัวนั้น */
+  const QUIETER = { whoosh: 0.3 };
   const FADE_MS = 2200;
   const BASE = document.body.dataset.audioBase || './assets/audio/';
 
@@ -20,7 +22,7 @@
     }
     // โคลนทุกครั้ง เสียงสั้น ๆ จะได้ซ้อนกันได้ ไม่ต้องรอตัวก่อนจบ
     const shot = cache[name].cloneNode();
-    shot.volume = VOL.sfx;
+    shot.volume = VOL.sfx * (QUIETER[name] || 1);
     shot.play().catch(() => {});
   }
 

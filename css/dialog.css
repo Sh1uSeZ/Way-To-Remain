@@ -28,9 +28,9 @@
   position: fixed; z-index: 600;
   left: 50%; bottom: 5vh;
   transform: translate(-50%, 20px);
-  width: min(1180px, 90vw);
-  min-height: 22vh;
-  padding: 5.4vh 5vw 3vh 5vw;
+  width: min(1040px, 82vw);
+  min-height: 34vh;
+  padding: 11vh 12vw 9vh 21vw;
   color: #fff;
   opacity: 0; pointer-events: none;
   transition: opacity .28s var(--ease), transform .28s var(--ease);
@@ -42,13 +42,19 @@
 .dialog__box {
   position: absolute; inset: 0; z-index: 0;
   background: #0b0a09;
-  clip-path: polygon(1.2% 0, 100% 2.6%, 98.6% 100%, 0 95%);
+  clip-path: polygon(31.15% 0%, 35.57% 24.42%, 22.49% 32.85%, 21.67% 34.01%, 90.35% 20.06%, 87.33% 28.20%, 87.90% 43.90%, 93.05% 27.91%, 99.92% 54.07%, 88.96% 69.19%, 90.19% 99.71%, 17.83% 78.49%, 17.01% 78.49%, 14.88% 87.21%, 8.42% 69.77%, 6.62% 75.29%, 0% 52.03%, 0% 49.13%, 1.39% 50.29%, 8.50% 35.76%, 7.28% 26.74%);
 }
+/* ขอบขาวคั่นกลางแบบเดียวกับต้นฉบับ ใช้รูปทรงเดิมย่อเข้ามา */
+.dialog__box::before, .dialog__box::after {
+  content: ''; position: absolute; clip-path: inherit;
+}
+.dialog__box::before { inset: 4px;  background: #fff; }
+.dialog__box::after  { inset: 10px; background: #0b0a09; }
 .dialog__name, .dialog__text, .dialog__next { position: relative; z-index: 1; }
 
 /* ป้ายชื่อเอียงสวนทางกับกล่อง */
 .dialog__name {
-  position: absolute; left: 3.2vw; top: -1.5em;
+  position: absolute; left: 18vw; top: 2.2vh;
   transform: skewX(-11deg);
   background: var(--accent);
   color: #fff;
@@ -76,7 +82,8 @@
 @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
 @media (max-height: 520px) {
-  .dialog { bottom: 2vh; min-height: 30vh; padding: 5vh 4vw 3vh; }
+  /* จอเตี้ยต้องคงระยะซ้ายไว้ ไม่งั้นข้อความไปทับปลายลูกศร */
+  .dialog { bottom: 2vh; min-height: 46vh; padding: 13vh 11vw 8vh 22vw; }
   .dialog__text { font-size: clamp(13px, 2.7vw, 19px); line-height: 1.55; min-height: 3em; }
   .vn__char { height: 62vh; }
 }

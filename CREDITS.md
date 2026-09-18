@@ -83,13 +83,22 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 Background music is used on the Roi Et stage only. The title screen and lobby have
 sound effects but no music, by the client's instruction.
 
-## Dialog box styling — inspired by Persona 5, built from scratch
+## Dialog box styling — Persona 5 derived, no Atlus files shipped
 
-The dialog box imitates the *look* of Persona 5: portraits either side, an angled
-black panel, a skewed name tag. **No Persona 5 files are used.** The shapes are CSS
-`clip-path` polygons and the accent `#a84848` is sampled from the client's own ticket
-and visa artwork. Persona 5's actual assets are Atlus copyright and cannot be shipped
-in a public repository.
+The dialog box imitates Persona 5: portraits either side, an angled black panel with a
+white inner rim, a skewed name tag. The accent `#a84848` is sampled from the client's
+own ticket and visa artwork.
+
+**No Persona 5 image files are in this repository.** The client supplied a Persona 5
+dialog-shape PNG as a reference; rather than ship it, the outline was traced to a
+21-point CSS `clip-path` polygon. That keeps the repo free of a file whose provenance
+we cannot establish, and a polygon also scales to any dialog size and recolours, which
+a fixed-size PNG cannot.
+
+> **Residual risk, stated plainly:** a traced outline is still derived from the source.
+> Simple geometric shapes carry thin copyright protection, but this is not the same as
+> an independently invented shape. If the client wants no Persona 5 lineage at all, the
+> polygon in `css/dialog.css` is one line to swap for an original shape.
 
 ## Font — Playpen Sans Thai
 
