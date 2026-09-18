@@ -52,3 +52,16 @@ button, button:focus, button:focus-visible, button::-moz-focus-inner {
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
 }
+
+.mute {
+  position: fixed; right: 1.6vw; top: 2.2vh; z-index: 800;
+  width: 2.6em; height: 2.6em;
+  font-size: clamp(12px, 1vw, 16px);
+  color: var(--paper);
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  cursor: pointer; opacity: .45;
+  transition: opacity .25s var(--ease);
+}
+.mute:hover { opacity: .9; }
+.mute::before { content: '♪'; font-size: 1.15em; line-height: 1; }
+:root.is-muted .mute::before { content: '♪'; opacity: .35; text-decoration: line-through; }

@@ -19,6 +19,7 @@
 
       els.dim.classList.add('is-open');
       els.root.classList.add('is-open');
+      if (window.Sound) window.Sound.play('thud');
       type(lines[0]);
     }
 
@@ -30,6 +31,8 @@
       typer = setInterval(() => {
         shown += text[i++];
         els.text.textContent = shown;
+        // ทุกตัวอักษรจะรัวเกินไป เล่นทุก 4 ตัวพอ
+        if (window.Sound && i % 4 === 0) window.Sound.play('blip');
         if (i >= text.length) clearInterval(typer);
       }, TYPE_MS);
     }
@@ -44,6 +47,7 @@
         return;
       }
       index++;
+      if (window.Sound) window.Sound.play('select');
       if (index < lines.length) { type(lines[index]); return; }
       close();
     }

@@ -49,6 +49,7 @@
       hot = next;
       if (hot) {
         document.querySelector('.obj--' + hot).classList.add('is-hot');
+        if (window.Sound) window.Sound.play('tick');
         opts.tag.textContent = opts.labels[hot] || '';
         opts.tag.classList.add('is-visible');
       } else {

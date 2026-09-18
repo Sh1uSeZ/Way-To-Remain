@@ -8,6 +8,7 @@
   }
 
   function focusCard(card) {
+    Sound.play('paper');
     board.style.transformOrigin = card.dataset.focusX + '% ' + card.dataset.focusY + '%';
     board.classList.add('is-zoomed');
     hint.textContent = card.dataset.label || '';
@@ -24,7 +25,7 @@
     let focused = null;
     cards.forEach((card) => {
       card.addEventListener('click', () => {
-        if (focused === card) { window.goTo(card.dataset.goto); return; }
+        if (focused === card) { Sound.play('stamp'); window.goTo(card.dataset.goto); return; }
         focused = card;
         focusCard(card);
       });
@@ -40,7 +41,7 @@
     card.addEventListener('focus',      () => focusCard(card));
     card.addEventListener('mouseleave', resetCamera);
     card.addEventListener('blur',       resetCamera);
-    card.addEventListener('click', () => window.goTo(card.dataset.goto));
+    card.addEventListener('click', () => { Sound.play('stamp'); window.goTo(card.dataset.goto); });
   });
 
   board.addEventListener('mouseleave', resetCamera);

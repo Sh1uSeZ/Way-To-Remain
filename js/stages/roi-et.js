@@ -1,6 +1,9 @@
 (function () {
   const D = window.ROIET_DIALOG;
 
+  Sound.bgm('bgm-roiet-khaen.mp3');
+  Sound.amb('amb-roiet.mp3');
+
   let talkedToVillager = false;
 
   const dialog = window.createDialog({

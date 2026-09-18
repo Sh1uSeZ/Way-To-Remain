@@ -51,6 +51,31 @@ change needed.
 
 Like the rest of the code, no licence is granted for them — see [LICENSE](LICENSE).
 
+## Audio — sourced by the developer, licences NOT YET RECORDED
+
+> **⚠ OUTSTANDING.** These files were downloaded from free sound libraries, but the
+> source URL and licence of each one is not recorded below. The repo is public, so
+> any CC-BY file here is currently being used **without the attribution its licence
+> requires**. Fill in the two right-hand columns from wherever each file was
+> downloaded, and drop anything that turns out to be non-commercial or share-alike.
+
+| File | Used for | Source | Licence |
+|---|---|---|---|
+| `assets/audio/bgm-roiet-khaen.mp3` | Roi Et background music (khaen) | — | — |
+| `assets/audio/amb-roiet.mp3` | Roi Et ambience, river and insects | — | — |
+| `assets/audio/sfx-stamp.mp3` | Passport stamp on stage select | — | — |
+| `assets/audio/sfx-paper.mp3` | Paper rustle on card hover | — | — |
+| `assets/audio/sfx-hover.mp3` | Start button hover | — | — |
+| `assets/audio/sfx-confirm.mp3` | Start button press | — | — |
+| `assets/audio/sfx-whoosh.mp3` | Page transition | — | — |
+| `assets/audio/sfx-tick.mp3` | Hotspot hover | — | — |
+| `assets/audio/sfx-thud.mp3` | Dialog box opens | — | — |
+| `assets/audio/sfx-blip.mp3` | Dialog typewriter | — | — |
+| `assets/audio/sfx-select.mp3` | Dialog advance | — | — |
+
+Background music is used on the Roi Et stage only. The title screen and lobby have
+sound effects but no music, by the client's instruction.
+
 ## Font — Playpen Sans Thai
 
 Designed by TypeTogether, distributed through Google Fonts under the
