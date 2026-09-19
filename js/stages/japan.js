@@ -1,11 +1,7 @@
 (function () {
-  const D = window.BANGKOK_DIALOG;
+  const D = window.JAPAN_DIALOG;
 
-  Sound.bgm('bgm-bangkok.mp3');
-
-  /* คนในวัดจะไม่พูดด้วยจนกว่าจะไปฟังเด็กก่อน */
-  let heardChild = false;
-  let heardMonk  = false;
+  Sound.bgm('bgm-japan.mp3');
 
   const dialog = window.createDialog({
     root:  document.getElementById('dialog'),
@@ -25,25 +21,14 @@
     isBusy:   () => dialog.isOpen
   });
 
-  function say(script) {
-    dialog.open(Object.assign({ cast: D.cast }, script));
-  }
-
   function onHotspot(which) {
     if (dialog.isOpen || panorama.wasDragged()) return;
-
-    if (which === 'child')       say(D.child);
-    else if (which === 'monk')   say(heardChild ? D.monk : D.monkLocked);
-    else if (which === 'corpse') {
-      if (heardChild && heardMonk) window.goTo('./bangkok-ritual.html');
-      else say(D.corpseLocked);
-    }
+    if (which === 'monk') dialog.open(Object.assign({ cast: D.cast }, D.monk));
     panorama.refreshHover();
   }
 
   function onDialogClose(script) {
-    if (script.lines === D.child.lines) heardChild = true;
-    if (script.lines === D.monk.lines)  heardMonk  = true;
+    if (script.lines === D.monk.lines) window.goTo(D.monk.next, 700);
   }
 
   document.querySelectorAll('.hotspot').forEach((hs) => {

@@ -1,0 +1,7 @@
+/* ตำแหน่งวัดจากไฟล์ "ตัวอย่าง" ของลูกค้า ฉาก 3965x1080 */
+.obj--monk     { left: 60.9079%; top: 39.0741%; width: 10.9710%; }
+.hotspot--monk { left: 62.3707%; top: 44.0741%; width: 8.9786%; height: 51.7593%; }
+
+@media (pointer: coarse) {
+  .hotspot--monk { left: 60.9%; width: 11.9%; }
+}

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="color-scheme" content="light">
+<title>Ways to Remain — ญี่ปุ่น</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<link rel="stylesheet" href="../css/panorama.css">
+<link rel="stylesheet" href="../css/stage-japan.css">
+<link rel="stylesheet" href="../css/dialog.css">
+</head>
+<body data-audio-base="../assets/audio/">
+
+<div class="viewport" id="viewport">
+  <div class="world" id="world">
+    <img class="world__bg" src="../assets/japan/scene.png" alt="ทางเดินวัด ญี่ปุ่น">
+
+    <div class="obj obj--monk"><img src="../assets/japan/monk.png" alt=""></div>
+
+    <button class="hotspot hotspot--monk" type="button" data-obj="monk" aria-label="พระ"></button>
+  </div>
+</div>
+
+<div class="tag" id="tag"></div>
+<button class="back" id="backBtn" type="button">&lsaquo; กลับหน้าเลือกด่าน</button>
+
+<div class="dim" id="dim"></div>
+<div class="vn">
+  <img class="vn__char" id="charSlot" alt="">
+</div>
+<div class="dialog" id="dialog">
+  <div class="dialog__name" id="dialogName"></div>
+  <div class="dialog__text" id="dialogText"></div>
+  <div class="dialog__next">&#9660;</div>
+</div>
+
+<script src="../js/core/touch.js"></script>
+<script src="../js/core/audio.js"></script>
+<script src="../js/core/transition.js"></script>
+<script src="../js/core/dialog.js"></script>
+<script src="../js/core/panorama.js"></script>
+<script src="../data/japan-dialog.js"></script>
+<script src="../js/stages/japan.js"></script>
+</body>
+</html>

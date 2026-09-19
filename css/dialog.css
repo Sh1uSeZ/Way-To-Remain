@@ -1,3 +1,5 @@
+:root { --dlg-w: min(68vw, calc(34vh * 3.556)); }
+
 .dim {
   position: fixed; inset: 0; z-index: 500;
   background: rgba(0,0,0,.55);
@@ -7,11 +9,16 @@
 .dim.is-open { opacity: 1; pointer-events: auto; cursor: pointer; }
 
 /* --- ตัวละครทีละคน อยู่ฝั่งเดียวกันเสมอ สลับตัวเมื่อเปลี่ยนคนพูด --- */
-.vn { position: fixed; inset: 0; z-index: 560; pointer-events: none; }
+.vn {
+  position: fixed; left: 50%; bottom: 0; z-index: 560;
+  transform: translateX(-50%);
+  width: var(--dlg-w); height: 100%;
+  pointer-events: none;
+}
 
 .vn__char {
-  position: absolute; bottom: -8vh; left: clamp(-60px, -4vw, 0px);
-  height: 98vh; width: auto;
+  position: absolute; bottom: -6vh; left: -7%;
+  height: 68vh; width: auto;
   opacity: 0;
   transform: translateY(5%) scale(.97);
   transition: opacity .2s var(--ease), transform .2s var(--ease);
@@ -26,9 +33,9 @@
 /* --- กล่องข้อความ ใช้ภาพจากลูกค้า ล็อกสัดส่วนตามภาพจะได้ไม่ยืดเพี้ยน --- */
 .dialog {
   position: fixed; z-index: 600;
-  left: 7vw; bottom: 4vh;
-  transform: translateY(20px);
-  width: min(85vw, calc(48vh * 3.556));
+  left: 50%; bottom: 6vh;
+  transform: translate(-50%, 18px);
+  width: var(--dlg-w);
   aspect-ratio: 1223 / 344;
   background: url('../assets/ui/dialog-p5.png') center/100% 100% no-repeat;
   color: #fff;
@@ -39,10 +46,10 @@
 /* เล่นใหม่ทุกครั้งที่มีคนพูด กล่องจะยืดออกจากซ้ายไปขวาเหมือนพุ่งออกจากตัวละคร */
 .dialog.is-speaking { animation: boxOut .3s var(--ease); }
 @keyframes boxOut {
-  from { opacity: .25; transform: scaleX(.4); }
-  to   { opacity: 1;   transform: scaleX(1); }
+  from { opacity: .25; transform: translate(-50%, 0) scaleX(.4); }
+  to   { opacity: 1;   transform: translate(-50%, 0) scaleX(1); }
 }
-.dialog.is-open { opacity: 1; pointer-events: auto; transform: none; cursor: pointer; }
+.dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
 
 /* ตำแหน่งวัดจากภาพจริง: แถบชื่อด้านบนซ้าย ตัวข้อความอยู่กลางลำตัวกล่อง */
 .dialog__name {
@@ -50,7 +57,7 @@
   width: 26%; height: 17%;
   display: flex; align-items: center;
   transform: rotate(-3.82deg);
-  font-size: clamp(9px, min(0.86vw, 1.7vh), 27px); font-weight: 800;
+  font-size: clamp(8px, min(0.67vw, 1.2vh), 21px); font-weight: 800;
   /* แถบชื่อในภาพเป็นพื้นสีขาว ตัวอักษรต้องเป็นสีเข้ม */
   color: #0b0a09; white-space: nowrap;
 }
@@ -61,7 +68,7 @@
   left: 20.2%; right: 20.2%; top: 34%; bottom: 13%;
   display: flex; align-items: center;
   transform: rotate(2.19deg);
-  font-size: clamp(11px, min(1.12vw, 2.22vh), 36px);
+  font-size: clamp(10px, min(0.88vw, 1.57vh), 28px);
   font-weight: 600;
   line-height: 1.45;
   white-space: pre-wrap;
@@ -69,7 +76,7 @@
 
 .dialog__next {
   position: absolute; right: 21%; bottom: 20%;
-  font-size: clamp(8px, min(0.65vw, 1.28vh), 20px);
+  font-size: clamp(7px, min(0.5vw, 0.9vh), 15px);
   color: var(--accent);
   animation: nudge 1.4s ease-in-out infinite;
 }
@@ -77,5 +84,5 @@
 
 @media (max-height: 560px) {
   .dialog { bottom: 2vh; }
-  .vn__char { height: 104vh; bottom: -6vh; }
+  .vn__char { height: 78vh; bottom: -5vh; }
 }

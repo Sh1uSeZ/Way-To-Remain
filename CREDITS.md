@@ -37,6 +37,11 @@ permission. See [LICENSE](LICENSE).
 | `assets/chars/child-portrait.png` | Child portrait for the dialog box |
 | `assets/chars/temple-man-portrait.png` | Temple man portrait for the dialog box |
 | `assets/chars/hero-portrait.png` | The protagonist — downscaled from the client's 2640 × 6160 original |
+| `assets/japan/scene.png` | Japanese temple path panorama (3965 × 1080) |
+| `assets/japan/monk.png` | Sweeping monk object layer |
+| `assets/chars/japan-monk-portrait.png` | Monk portrait for the dialog box |
+| `assets/audio/bgm-bangkok.mp3` | Bangkok background music (client's "thai bgm") |
+| `assets/audio/bgm-japan.mp3` | Japan background music (client's "jap bgm") |
 
 The site is published at https://sh1usez.github.io/Way-To-Remain/, so these files
 are served publicly. GitHub Pages cannot be access-restricted on a free or Pro
@@ -69,6 +74,8 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 | File | Used for | Source | Licence |
 |---|---|---|---|
 | `assets/audio/bgm-roiet-khaen.mp3` | Roi Et background music (khaen) | — | — |
+| `assets/audio/bgm-bangkok.mp3` | Bangkok background music | — | — |
+| `assets/audio/bgm-japan.mp3` | Japan background music | — | — |
 | `assets/audio/amb-roiet.mp3` | Roi Et ambience, river and insects | — | — |
 | `assets/audio/sfx-stamp.mp3` | Passport stamp on stage select | — | — |
 | `assets/audio/sfx-paper.mp3` | Paper rustle on card hover | — | — |
