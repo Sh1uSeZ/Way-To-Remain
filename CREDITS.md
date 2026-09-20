@@ -44,8 +44,19 @@ permission. See [LICENSE](LICENSE).
 | `assets/papua/deputy.png` | Deputy chief object layer |
 | `assets/papua/corpse.png` | The late chief on the drying rack |
 | `assets/chars/papua-deputy-portrait.png` | Deputy chief portrait for the dialog box |
+| `assets/ritual/bg.png` | Dark minigame backdrop — client's file is named "ใช้ทุกด่าน" (use on every stage) |
+| `assets/ritual/bangkok/bed.png` | Bangkok bier — white background keyed out by the developer, artwork unchanged |
+| `assets/ritual/bangkok/corpse.png` | Bangkok shrouded body — white background keyed out by the developer, artwork unchanged |
+| `assets/ritual/bangkok/applied-flowers.png` | Scattered incense flowers shown once the player gives the เครื่องหอม |
+| `assets/items/tobacco.png` | Tobacco leaf — ritual item |
+| `assets/items/lime.png` | Slaked lime — ritual item |
+| `assets/items/flowers.png` | Dried flowers / incense — ritual item |
+| `assets/items/honey.png` | Bowl of honey — ritual item |
+| `assets/items/torch.png` | Torch — ritual item |
+| `assets/items/clay-fat.png` | Red clay mixed with fat — ritual item |
 | `assets/audio/bgm-bangkok.mp3` | Bangkok background music (client's "thai bgm") |
 | `assets/audio/bgm-japan.mp3` | Japan background music (client's "jap bgm") |
+| `assets/audio/bgm-papua.mp3` | Papua New Guinea background music (client's "papua bgm") |
 
 The site is published at https://sh1usez.github.io/Way-To-Remain/, so these files
 are served publicly. GitHub Pages cannot be access-restricted on a free or Pro
@@ -80,6 +91,7 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 | `assets/audio/bgm-roiet-khaen.mp3` | Roi Et background music (khaen) | — | — |
 | `assets/audio/bgm-bangkok.mp3` | Bangkok background music | — | — |
 | `assets/audio/bgm-japan.mp3` | Japan background music | — | — |
+| `assets/audio/bgm-papua.mp3` | Papua New Guinea background music | — | — |
 | `assets/audio/amb-roiet.mp3` | Roi Et ambience, river and insects | — | — |
 | `assets/audio/sfx-stamp.mp3` | Passport stamp on stage select | — | — |
 | `assets/audio/sfx-paper.mp3` | Paper rustle on card hover | — | — |
@@ -90,6 +102,8 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 | `assets/audio/sfx-thud.mp3` | Dialog box opens | — | — |
 | `assets/audio/sfx-blip.mp3` | Dialog typewriter | — | — |
 | `assets/audio/sfx-select.mp3` | Dialog advance | — | — |
+| `assets/audio/sfx-error.mp3` | Wrong item in the ritual minigame | Supplied by the client as `universfield-wrong-answer-126515.mp3` — filename points to Universfield on Pixabay, **unconfirmed** | — |
+| `assets/audio/bgm-ritual.mp3` | Minigame background music | Supplied by the client as `lilliben-dark-ambient-background-mystery-365195.mp3` — filename points to Lilliben on Pixabay, **unconfirmed** | — |
 
 Background music is used on the Roi Et stage only. The title screen and lobby have
 sound effects but no music, by the client's instruction.

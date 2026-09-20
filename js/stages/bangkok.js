@@ -1,6 +1,9 @@
 (function () {
   const D = window.BANGKOK_DIALOG;
 
+  /* โหลดรูปตัวละครไว้ก่อน ไม่งั้นตอนสลับคนพูดจะเห็นรูปคนเก่าค้างอยู่ */
+  if (window.Preload) window.Preload.images(Object.values(D.cast).map((c) => c.portrait));
+
   Sound.bgm('bgm-bangkok.mp3');
 
   /* คนในวัดจะไม่พูดด้วยจนกว่าจะไปฟังเด็กก่อน */

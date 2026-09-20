@@ -13,17 +13,35 @@
   const cache = {};
   const loops = [];
 
+  /* cloneNode() ก๊อปแต่ตัว element ไม่ได้ก๊อปข้อมูลเสียงที่โหลดไว้ ตัวโคลนเลยต้องโหลดใหม่ทุกครั้ง
+     ครั้งแรกของแต่ละเสียงจึงมักไม่ดัง ใช้เป็น pool ที่โหลดไว้แล้วแทน */
+  const POOL = 3;
+
+  function pool(name) {
+    if (!cache[name]) {
+      cache[name] = [];
+      for (let i = 0; i < POOL; i++) {
+        const a = new Audio(BASE + 'sfx-' + name + '.mp3');
+        a.preload = 'auto';
+        a.load();
+        cache[name].push(a);
+      }
+    }
+    return cache[name];
+  }
+
   function play(name) {
     if (api.muted) return;
-    if (!cache[name]) {
-      const a = new Audio(BASE + 'sfx-' + name + '.mp3');
-      a.preload = 'auto';
-      cache[name] = a;
-    }
-    // โคลนทุกครั้ง เสียงสั้น ๆ จะได้ซ้อนกันได้ ไม่ต้องรอตัวก่อนจบ
-    const shot = cache[name].cloneNode();
-    shot.volume = VOL.sfx * (QUIETER[name] || 1);
-    shot.play().catch(() => {});
+    const p = pool(name);
+    const a = p.find((x) => x.paused || x.ended) || p[0];
+    try { a.currentTime = 0; } catch (e) {}
+    a.volume = VOL.sfx * (QUIETER[name] || 1);
+    a.play().catch(() => {});
+  }
+
+  /* อุ่นเสียงทั้งหมดไว้ตั้งแต่เปิดหน้า จะได้ไม่มีเสียงไหนเงียบในครั้งแรก */
+  function warm() {
+    ['hover', 'confirm', 'paper', 'stamp', 'tick', 'thud', 'select', 'whoosh', 'error'].forEach(pool);
   }
 
   function loop(file, target) {
@@ -81,6 +99,8 @@
       document.documentElement.classList.toggle('is-muted', api.muted);
     }
   };
+
+  warm();
 
   window.Sound = api;
   if (api.muted) document.documentElement.classList.add('is-muted');

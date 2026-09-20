@@ -1,6 +1,9 @@
 (function () {
   const D = window.ROIET_DIALOG;
 
+  /* โหลดรูปตัวละครไว้ก่อน ไม่งั้นตอนสลับคนพูดจะเห็นรูปคนเก่าค้างอยู่ */
+  if (window.Preload) window.Preload.images(Object.values(D.cast).map((c) => c.portrait));
+
   let talkedToVillager = false;
 
   Sound.bgm('bgm-roiet-khaen.mp3');

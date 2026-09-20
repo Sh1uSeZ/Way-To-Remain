@@ -13,6 +13,9 @@
 
     function open(next) {
       script = next;
+      if (window.Preload && next.cast) {
+        window.Preload.images(Object.values(next.cast).map((c) => c.portrait));
+      }
       lines = next.lines;
       index = 0;
       api.isOpen = true;
@@ -31,23 +34,36 @@
       if (el) {
         if (!role || !role.portrait) {
           el.classList.remove('is-present', 'is-swapping');
+        } else if (el.dataset.src !== role.portrait) {
+          swap(el, role.portrait);
         } else {
-          const changed = el.dataset.src !== role.portrait;
-          if (changed) {
-            el.src = role.portrait;
-            el.dataset.src = role.portrait;
-          }
           el.classList.add('is-present');
-          if (changed) {
-            el.classList.remove('is-swapping');
-            void el.offsetWidth;          // บังคับให้ animation เริ่มใหม่
-            el.classList.add('is-swapping');
-          }
         }
       }
 
       els.name.textContent = (role && role.name) || '';
       els.name.classList.toggle('is-hidden', !(role && role.name));
+    }
+
+    /* ห้ามตั้ง src แล้วโชว์ทันที เพราะ <img> จะยังเป็นรูปคนเก่าจนกว่ารูปใหม่จะ decode เสร็จ
+       (นี่คือสาเหตุที่บางทีชื่อเปลี่ยนแล้วแต่ยังเห็นหน้าคนเดิม) */
+    let swapId = 0;
+    function swap(el, url) {
+      const id = ++swapId;
+      const apply = () => {
+        if (id !== swapId) return;        // มีบรรทัดใหม่แซงไปแล้ว ทิ้งอันนี้
+        el.src = url;
+        el.dataset.src = url;
+        el.classList.add('is-present');
+        el.classList.remove('is-swapping');
+        void el.offsetWidth;
+        el.classList.add('is-swapping');
+      };
+      if (window.Preload && window.Preload.isReady(url)) apply();
+      else {
+        el.classList.remove('is-present'); // ซ่อนไว้ก่อน ดีกว่าโชว์ผิดคน
+        (window.Preload ? window.Preload.images([url]) : Promise.resolve()).then(apply);
+      }
     }
 
     function show(i) {

@@ -1,0 +1,159 @@
+/* หน้าพิธีศพ — ศพอยู่กลางจอ แถบไอเทมอยู่ขวาตามที่ลูกค้าร่างมา
+   ช่องไอเทมทำขอบนูนแบบ Minecraft */
+
+.ritual {
+  position: fixed; inset: 0; overflow: hidden;
+  background: var(--void);
+}
+
+/* ฉากด่านเดิมเอามาเบลอไว้ข้างหลัง ให้รู้ว่ายังอยู่ที่เดิม */
+/* ฉากมืดที่ลูกค้าวาดมา ไฟล์ชื่อ "ใช้ทุกด่าน" เลยใช้เป็นพื้นหลังของมินิเกมทุกด่าน */
+.ritual__bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+/* กล่องฉาก ทุก layer ซ้อนกันในกรอบนี้ ของที่วางแล้วก็อิงกรอบนี้เหมือนกัน */
+.scene {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  aspect-ratio: var(--scene-ar, 1.833);
+  transition: filter .18s var(--ease);
+}
+
+/* ด่านที่ลูกค้าวาดมาเต็มแคนวาส — ใส่ให้พอดีจอ ไม่ crop องค์ประกอบที่เขาจัดไว้
+   ขอบที่เหลือมี .ritual__bg ซึ่งเป็นภาพเดียวกันรองอยู่ เลยไม่เห็นรอยต่อ */
+.scene--cover {
+  width: min(100vw, calc(var(--app-h, 100vh) * var(--scene-ar, 1.833)));
+}
+
+/* ด่านที่ยังใช้ภาพศพเดิม — วางไว้กลางจอบนพื้นหลังมืด */
+.scene--fit {
+  width: min(52vw, calc(var(--app-h, 100vh) * .72 * var(--scene-ar, 1.833)));
+}
+
+.scene.is-over { filter: brightness(1.15) drop-shadow(0 0 18px rgba(168, 72, 72, .75)); }
+
+.scene__layer {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: contain;
+  pointer-events: none;
+}
+
+/* ของที่วางถูกแล้ว โผล่ขึ้นมาบนศพ */
+.placed {
+  position: absolute; z-index: 2;
+  opacity: 0; transition: opacity .55s var(--ease);
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.55));
+}
+/* ภาพ "ตอนวางแล้ว" ที่ลูกค้าวาดมาเต็มแคนวาส ทับลงไปตรงๆ ไม่ต้องจัดตำแหน่ง */
+.placed--full {
+  inset: 0; width: 100%; height: 100%;
+  object-fit: contain; filter: none;
+}
+.placed.is-in { opacity: 1; }
+
+/* ป้ายบอกว่า NPC สั่งอะไรไว้ */
+.hint {
+  position: fixed; left: 50%; top: 2.6vh;
+  transform: translateX(-50%); z-index: 250;
+  width: max-content; max-width: 92%;
+  padding: .8em 2.2em;
+  text-align: center; line-height: 1.5;
+  color: var(--paper);
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  font-size: clamp(13px, min(1.15vw, 2vh), 22px);
+  transition: opacity .4s var(--ease);
+}
+.hint.is-hidden { opacity: 0; }
+
+/* ---------- แถบไอเทมฝั่งขวา ---------- */
+/* ใช้ป้ายพู่กันสีดำอันเดียวกับ .hint ตามที่ลูกค้าสั่ง ไม่ใช่กรอบเทาแบบ Minecraft แล้ว */
+.rail-wrap {
+  position: fixed; right: 2.2vw; top: 50%;
+  transform: translateY(-50%);
+  z-index: 300;
+  display: flex; flex-direction: column; align-items: center; gap: .6vh;
+}
+
+.rail {
+  overflow: hidden;        /* เป็นหน้าต่างบัง โชว์ทีละ 3 ช่อง */
+}
+.rail__strip {
+  display: flex; flex-direction: column; gap: .7vh;
+  transition: transform .34s var(--ease);
+}
+
+.slot {
+  position: relative;
+  width:  min(12vw, 19vh);
+  height: min(12vw, 19vh);
+  overflow: hidden;
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  cursor: grab; touch-action: none;
+  transition: filter .18s var(--ease);
+}
+.slot:hover { filter: drop-shadow(0 0 12px rgba(168, 72, 72, .9)); }
+.slot:active { cursor: grabbing; }
+.slot.is-used { pointer-events: none; opacity: .3; filter: grayscale(1); }
+
+/* ต้องกางด้วย inset ไม่ใช่ width/height เป็น % เพราะความสูงเป็น % ของกล่องที่สูง auto
+   จะกลายเป็น indefinite แล้วเบราว์เซอร์ถอยไปใช้สัดส่วนจริงของภาพแทน
+   ของที่สูงผอมอย่างคบเพลิง (175×470) เลยทะลุออกนอกช่อง */
+.slot__icon {
+  position: absolute; inset: 9%;
+  width: auto; height: auto;
+  max-width: 82%; max-height: 82%;
+  margin: auto;
+  object-fit: contain;
+  pointer-events: none; user-select: none;
+  transition: transform .18s var(--ease);
+}
+.slot:hover .slot__icon { transform: scale(1.08); }
+
+.rail-btn {
+  width: min(12vw, 19vh); height: 5vh; min-height: 34px;
+  display: grid; place-items: center;
+  color: var(--paper); font-size: clamp(14px, 1.5vh, 22px); line-height: 1;
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  cursor: pointer;
+  transition: color .18s var(--ease), opacity .18s var(--ease);
+}
+.rail-btn:hover:not(:disabled) { color: var(--accent); }
+.rail-btn:disabled { opacity: .22; cursor: default; }
+
+/* tooltip โผล่ทางซ้ายของช่อง ใช้ป้ายพู่กันอันเดียวกับกล่องอื่น
+   ขอบเป็นรอยแปรงขรุขระ เลยต้องเผื่อ padding ไม่ให้ตัวอักษรไปทับขอบ */
+.item-tip {
+  position: fixed; z-index: 500;
+  transform: translateY(-50%);
+  max-width: 30vw; padding: 1em 1.8em;
+  color: var(--paper);
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  font-size: clamp(12px, min(1.05vw, 1.9vh), 20px);
+  line-height: 1.45;
+  opacity: 0; pointer-events: none;
+  transition: opacity .14s var(--ease);
+}
+.item-tip.is-visible { opacity: 1; }
+
+/* ของที่กำลังลากอยู่ใต้เมาส์ */
+.ghost {
+  position: fixed; z-index: 600;
+  width: min(12vw, 19vh); height: min(12vw, 19vh);
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  opacity: 0; pointer-events: none;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,.6));
+}
+.ghost.is-visible { opacity: .92; }
+
+/* จอเตี้ย/มือถือ — ศพเล็กลง แถบไอเทมชิดขอบกว่าเดิม */
+@media (max-height: 560px), (max-width: 760px) {
+  .scene--fit { width: min(74vw, calc(var(--app-h, 100vh) * .58 * var(--scene-ar, 1.833))); }
+  .rail-wrap { right: 1.2vw; }
+  .slot, .rail-btn, .ghost { width: min(16vw, 19vh); }
+  .slot, .ghost { height: min(16vw, 19vh); }
+  .item-tip { max-width: 44vw; }
+}

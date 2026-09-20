@@ -94,3 +94,33 @@
   .dialog { bottom: 2vh; }
   .vn__char { height: 78vh; bottom: -5vh; }
 }
+
+/* --- กล่องป้ายพู่กันสีดำ ใช้ในมินิเกม อันเดียวกับ .hint ตามที่ลูกค้าเลือก --- */
+.dialog--plain {
+  background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
+  aspect-ratio: auto;
+  min-height: 24vh;
+  /* ขอบป้ายเป็นรอยพู่กันขรุขระ ต้องเผื่อระยะไม่ให้ตัวอักษรไปนั่งทับขอบ */
+  padding: 2.2em 3.4em 2.4em;
+  display: flex; flex-direction: column; justify-content: center;
+}
+/* กล่องนี้ไม่มีธงให้ชื่อเกาะ ชื่อเลยวางตรงๆ ไม่ต้องเอียงตาม */
+.dialog--plain .dialog__name {
+  position: static;
+  transform: none;
+  display: block;
+  align-self: flex-start;
+  padding: 0;
+  background: none;
+  color: #fff;
+  font-size: clamp(15px, min(1.45vw, 2.6vh), 34px);
+  margin-bottom: .45em;
+}
+.dialog--plain .dialog__text {
+  position: static;
+  display: block;
+  color: var(--paper);
+  font-weight: 500;
+  font-size: clamp(14px, min(1.34vw, 2.4vh), 32px);
+}
+.dialog--plain .dialog__next { right: 2.2em; bottom: 1.2em; }

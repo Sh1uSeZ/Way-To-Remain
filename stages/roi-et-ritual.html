@@ -9,26 +9,47 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="../css/base.css">
 <link rel="stylesheet" href="../css/mobile.css">
-<link rel="stylesheet" href="../css/pending.css">
+<link rel="stylesheet" href="../css/ritual.css">
+<link rel="stylesheet" href="../css/dialog.css">
 </head>
 <body data-audio-base="../assets/audio/">
 
-<div class="pending">
-  <h1>พิธีศพ — ร้อยเอ็ด</h1>
-  <p>
-    หน้านี้เป็นโครงว่างรอไฟล์ภาพไอเทมจากลูกค้า<br>
-    ระบบลากไอเทมมาวางบนศพจะสร้างเมื่อได้ภาพแล้ว
-  </p>
-  <ol>
-    <li>ขั้นที่ 1 — เอาใบยาสูบมารองศพ (รอภาพ)</li>
-    <li>ขั้นที่ 2 — โปรยปูนขาวรอบๆ (รอภาพ)</li>
-  </ol>
-  <br>
-  <button class="back" type="button" onclick="goTo('../lobby.html')">&lsaquo; กลับหน้าเลือกด่าน</button>
+<div class="ritual">
+  <img class="ritual__bg" id="ritualBg" alt="">
+  <div class="scene" id="scene"></div>
+</div>
+
+<div class="hint" id="hint"></div>
+
+<div class="rail-wrap">
+  <button class="rail-btn" id="railUp" type="button" aria-label="เลื่อนขึ้น">&#9650;</button>
+  <div class="rail" id="rail"></div>
+  <button class="rail-btn" id="railDown" type="button" aria-label="เลื่อนลง">&#9660;</button>
+</div>
+
+<div class="item-tip" id="itemTip"></div>
+<img class="ghost" id="ghost" alt="">
+
+<button class="back" id="backBtn" type="button">&lsaquo; กลับหน้าเลือกด่าน</button>
+
+<div class="dim" id="dim"></div>
+<div class="vn">
+  <img class="vn__char" id="charSlot" alt="">
+</div>
+<div class="dialog dialog--plain" id="dialog">
+  <div class="dialog__name" id="dialogName"></div>
+  <div class="dialog__text" id="dialogText"></div>
+  <div class="dialog__next">&#9660;</div>
 </div>
 
 <script src="../js/core/touch.js"></script>
+<script src="../js/core/preload.js"></script>
 <script src="../js/core/audio.js"></script>
 <script src="../js/core/transition.js"></script>
+<script src="../js/core/dialog.js"></script>
+<script src="../js/core/ritual.js"></script>
+<script src="../data/ritual-items.js"></script>
+<script src="../data/roiet-ritual.js"></script>
+<script src="../js/stages/roi-et-ritual.js"></script>
 </body>
 </html>

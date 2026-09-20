@@ -1,7 +1,12 @@
 (function () {
   const D = window.PAPUA_DIALOG;
 
+  /* โหลดรูปตัวละครไว้ก่อน ไม่งั้นตอนสลับคนพูดจะเห็นรูปคนเก่าค้างอยู่ */
+  if (window.Preload) window.Preload.images(Object.values(D.cast).map((c) => c.portrait));
+
   let talked = false;
+
+  Sound.bgm('bgm-papua.mp3');
 
   const dialog = window.createDialog({
     root:  document.getElementById('dialog'),
