@@ -7,14 +7,24 @@
   const ORDER = ['bangkok', 'roiet', 'papua', 'japan'];
   const KEY = 'wtr:done';
 
-  /* บางเครื่องปิด storage ไว้ (โหมดส่วนตัว / บล็อกคุกกี้) ถ้าพึ่ง localStorage อย่างเดียว
+  /* ใช้ sessionStorage ไม่ใช่ localStorage — ความคืบหน้าอยู่แค่ในรอบที่เปิดเบราว์เซอร์นั้น
+     ปิดแท็บแล้วเปิดใหม่ = เริ่มจากด่านแรกที่ล็อกไว้เหมือนเดิม
+     เพราะถ้าเก็บถาวร พอเล่นจบครั้งเดียวด่านจะเปิดหมดตลอดไป
+     แล้วคนที่มาเปิดดูทีหลังจะไม่ได้เห็นระบบล็อกด่านเลย
+     (เสียงเปิด/ปิดยังเก็บใน localStorage เหมือนเดิม อันนั้นเป็นค่าที่ตั้งไว้ ไม่ใช่ความคืบหน้า)
+
+     บางเครื่องปิด storage ไว้ (โหมดส่วนตัว / บล็อกคุกกี้) ถ้าพึ่ง storage อย่างเดียว
      ผู้เล่นจะติดอยู่ด่านแรกตลอดไป เลยมีตัวสำรองในหน่วยความจำไว้ให้เล่นจบได้ในรอบนั้น */
   let memory = null;
+
+  /* เวอร์ชันก่อนเก็บไว้ใน localStorage เครื่องที่เคยเล่นเวอร์ชันเก่าจะมีค่าค้างอยู่
+     ตอนนี้ไม่ได้อ่านแล้ว แต่เก็บกวาดทิ้งให้เรียบร้อย จะได้ไม่มีขยะค้างในเครื่องผู้เล่น */
+  try { localStorage.removeItem(KEY); } catch (e) {}
 
   function read() {
     if (memory) return memory.slice();
     try {
-      const raw = localStorage.getItem(KEY);
+      const raw = sessionStorage.getItem(KEY);
       return raw ? JSON.parse(raw) : [];
     } catch (e) {
       memory = [];
@@ -24,7 +34,7 @@
 
   function write(list) {
     if (memory) { memory = list.slice(); return; }
-    try { localStorage.setItem(KEY, JSON.stringify(list)); }
+    try { sessionStorage.setItem(KEY, JSON.stringify(list)); }
     catch (e) { memory = list.slice(); }
   }
 

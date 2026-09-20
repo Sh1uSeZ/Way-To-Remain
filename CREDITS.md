@@ -19,7 +19,8 @@ permission. See [LICENSE](LICENSE).
 
 | File | What it is |
 |---|---|
-| `assets/title/title-bg.png` | Title screen painting, including the hand-lettered "Ways to Remain" logo |
+| `assets/title/title-bg.png` | Title screen painting (client's "new start page" — logo no longer baked in) |
+| `assets/title/title-logo.png` | Hand-lettered "Ways to Remain" logo — cropped and downscaled by the developer from the client's 4961 × 7016 original |
 | `assets/title/intro.mp4` | Animated opening sequence |
 | `assets/lobby/passport.png` | Passport spread used as the stage-select background |
 | `assets/lobby/ticket-roiet.png` | Roi Et bus ticket (stage 1 button) |

@@ -11,6 +11,14 @@
 
 .stage__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
 
+/* โลโก้เป็นไฟล์แยกแล้ว (เดิมฝังมากับพื้นหลัง) วางกลางวงรีเหนือปุ่ม */
+.stage__logo {
+  position: absolute; left: 50%; top: 45%;
+  transform: translate(-50%, -50%);
+  width: 46%; height: auto;
+  pointer-events: none;
+}
+
 /* ลูกค้าขอเป็นปุ่มสี่เหลี่ยม บอกว่าตัวอักษรลอยๆ เฉยๆ มันโล่งไป
    แล้วขอให้เล็กลงอีก จะได้ไม่แย่งความเด่นไปจากโลโก้
    ปุ่มวางอยู่บนภาพสีอ่อน เลยใช้พื้นกระดาษ+ขอบหมึก พอ hover ก็สลับสีกัน */

@@ -16,7 +16,13 @@ window.JAPAN_RITUAL = {
     cover: true,
     layers: [
       { id: 'bg',   src: '../assets/ritual/bg-japan.png' },
-      { id: 'monk', src: '../assets/ritual/japan/monk.png' },
+      /* ขนาดกับตำแหน่งอิงภาพ reference ที่ลูกค้าส่งมา
+         ต้องนั่งอยู่บน "เงาที่ขีดไว้" ในภาพพื้นหลัง ซึ่งอยู่ราวๆ y 78-90% ของแคนวาส
+         (ก่อนหน้านี้วางไว้ที่ 28% จากขอบล่าง ซึ่งบังเอิญไปตรงกับขอบบนของกล่องข้อความพอดี
+          เลยดูเหมือนพระนั่งอยู่บนกล่องข้อความแทนที่จะนั่งบนพื้น) */
+      { id: 'monk', src: '../assets/ritual/japan/monk.png',
+        place: { left: '50%', bottom: '13%', height: '76%',
+                 transform: 'translateX(-50%)' } },
       { id: 'hero', src: '../assets/ritual/japan/player.png',
         place: { left: '4%', bottom: '-4%', height: '82%' } }
     ]

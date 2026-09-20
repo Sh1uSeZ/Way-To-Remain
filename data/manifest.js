@@ -37,7 +37,7 @@ window.MANIFEST = {
     ["./assets/ritual/bg-japan.png", 750967],
     ["./assets/ritual/bg.png", 377837],
     ["./assets/ritual/japan/bowl.png", 184110],
-    ["./assets/ritual/japan/monk.png", 553133],
+    ["./assets/ritual/japan/monk.png", 495934],
     ["./assets/ritual/japan/player.png", 383746],
     ["./assets/ritual/papua/applied-clay.png", 103649],
     ["./assets/ritual/papua/applied-smoke.png", 132765],
@@ -51,7 +51,8 @@ window.MANIFEST = {
     ["./assets/roiet/coffin.png", 441979],
     ["./assets/roiet/scene.png", 2856549],
     ["./assets/roiet/villager.png", 159570],
-    ["./assets/title/title-bg.png", 821617],
+    ["./assets/title/title-bg.png", 547085],
+    ["./assets/title/title-logo.png", 67278],
     ["./assets/ui/brush-tag.svg", 1348],
     ["./assets/ui/dialog-p5.png", 46795]
   ],
