@@ -1,6 +1,6 @@
-/* ไฟล์ทั้งหมดที่เกมใช้ พร้อมขนาดเป็นไบต์ ให้หน้าแรกโหลดรวดเดียวจบ
-   ใส่ขนาดไว้เลยเพื่อคิด % ได้แม่นโดยไม่ต้องยิง HEAD ถาม 52 ไฟล์ก่อน
-   ถ้าเพิ่มไฟล์ใหม่ใน assets/ ต้องมาเติมที่นี่ด้วย */
+/* ไฟล์ทั้งหมดที่เกมใช้ พร้อมขนาดเป็นไบต์ หน้าแรกโหลดให้ครบก่อนถึงจะเริ่มเล่นได้
+   ใส่ขนาดไว้เลยเพื่อคิด % ได้แม่นโดยไม่ต้องยิง HEAD ถามทีละไฟล์ก่อน
+   ถ้าเพิ่มไฟล์ใหม่ใน assets/ ต้องมาเติมที่นี่ด้วย ไม่งั้นหน้าแรกจะไม่โหลดให้ */
 window.MANIFEST = {
   images: [
     ["./assets/bangkok/child.png", 60391],
@@ -28,11 +28,25 @@ window.MANIFEST = {
     ["./assets/lobby/ticket-roiet.png", 169036],
     ["./assets/papua/corpse.png", 110760],
     ["./assets/papua/deputy.png", 82680],
-    ["./assets/papua/scene.png", 2299018],
+    ["./assets/papua/scene.PNG", 2380647],
     ["./assets/ritual/bangkok/applied-flowers.png", 71233],
-    ["./assets/ritual/bangkok/bed.png", 551375],
-    ["./assets/ritual/bangkok/corpse.png", 235250],
+    ["./assets/ritual/bangkok/bed.png", 849504],
+    ["./assets/ritual/bangkok/corpse.png", 322740],
+    ["./assets/ritual/bangkok/speaker.png", 269874],
+    ["./assets/ritual/bg-japan.png", 750967],
     ["./assets/ritual/bg.png", 377837],
+    ["./assets/ritual/japan/bowl.png", 184110],
+    ["./assets/ritual/japan/monk.png", 553133],
+    ["./assets/ritual/japan/player.png", 383746],
+    ["./assets/ritual/papua/applied-clay.png", 103649],
+    ["./assets/ritual/papua/applied-smoke.png", 132765],
+    ["./assets/ritual/papua/bed.png", 578590],
+    ["./assets/ritual/papua/corpse-burnt.png", 265766],
+    ["./assets/ritual/papua/corpse.png", 236079],
+    ["./assets/ritual/roiet/applied-lime.png", 155361],
+    ["./assets/ritual/roiet/applied-tobacco.png", 393089],
+    ["./assets/ritual/roiet/bed.png", 570595],
+    ["./assets/ritual/roiet/corpse.png", 432354],
     ["./assets/roiet/coffin.png", 441979],
     ["./assets/roiet/scene.png", 2856549],
     ["./assets/roiet/villager.png", 159570],
@@ -57,5 +71,8 @@ window.MANIFEST = {
     ["./assets/audio/sfx-thud.mp3", 11520],
     ["./assets/audio/sfx-tick.mp3", 26749],
     ["./assets/audio/sfx-whoosh.mp3", 96966]
+  ],
+  video: [
+    ["./assets/title/intro.mp4", 1500827]
   ]
 };

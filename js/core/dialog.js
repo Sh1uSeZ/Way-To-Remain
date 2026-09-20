@@ -13,8 +13,9 @@
 
     function open(next) {
       script = next;
-      if (window.Preload && next.cast) {
-        window.Preload.images(Object.values(next.cast).map((c) => c.portrait));
+      if (window.Preload) {
+        if (next.cast) window.Preload.images(Object.values(next.cast).map((c) => c.portrait));
+        window.Preload.images(next.lines.map((l) => l.prop).filter(Boolean));
       }
       lines = next.lines;
       index = 0;
@@ -66,9 +67,27 @@
       }
     }
 
+    /* บางบรรทัดต้องโชว์ของประกอบ เช่นตอนพระพูดถึงชาอูรูชิ ให้ถ้วยชาลอยขึ้นมา
+       รอ decode ก่อนค่อยโชว์ ด้วยเหตุผลเดียวกับรูปตัวละคร */
+    function prop(url) {
+      const el = els.prop;
+      if (!el) return;
+      if (!url) { el.classList.remove('is-present'); return; }
+      const apply = () => {
+        el.src = url;
+        el.dataset.src = url;
+        el.classList.add('is-present');
+      };
+      if (el.dataset.src === url) { el.classList.add('is-present'); return; }
+      el.classList.remove('is-present');
+      if (window.Preload && window.Preload.isReady(url)) apply();
+      else (window.Preload ? window.Preload.images([url]) : Promise.resolve()).then(apply);
+    }
+
     function show(i) {
       const line = lines[i];
       cast(line.who);
+      prop(line.prop);
       // ยิง animation ใหม่ทุกบรรทัด ต้องถอดคลาสแล้วบังคับ reflow ก่อน ไม่งั้นมันไม่เล่นซ้ำ
       els.root.classList.remove('is-speaking');
       void els.root.offsetWidth;
@@ -110,6 +129,7 @@
       els.dim.classList.remove('is-open');
       els.root.classList.remove('is-open', 'is-speaking');
       if (els.char) els.char.classList.remove('is-present', 'is-swapping');
+      if (els.prop) els.prop.classList.remove('is-present');
       if (onClose) onClose(script);
     }
 

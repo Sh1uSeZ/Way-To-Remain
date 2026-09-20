@@ -1,13 +1,18 @@
 /* พิธีศพ ด่านร้อยเอ็ด — ของที่ถูกคือ ใบยาสูบ กับ ปูนขาว
-   บทด่าของผู้เฒ่าคำผมร่างไว้ก่อน รอลูกค้าตรวจ */
+   ลูกค้าวาดภาพ "ตอนวางแล้ว" มาให้ทั้งสองชิ้น วางทับได้เลยไม่ต้องจัดตำแหน่ง */
 window.ROIET_RITUAL = {
+  stage: 'roiet',
   title: 'พิธีศพ — ร้อยเอ็ด',
-  bg: '../assets/ritual/bg.png',
+  bg:    '../assets/ritual/bg.png',
 
   scene: {
-    ratio: 898 / 574,
-    cover: false,
-    layers: ['../assets/roiet/coffin.png']
+    ratio: 1980 / 1080,
+    cover: true,
+    layers: [
+      { id: 'bg',     src: '../assets/ritual/bg.png' },
+      { id: 'bed',    src: '../assets/ritual/roiet/bed.png' },
+      { id: 'corpse', src: '../assets/ritual/roiet/corpse.png' }
+    ]
   },
 
   cast: { npc: { name: 'ผู้เฒ่าคำ', portrait: '../assets/chars/villager-portrait.png' } },
@@ -16,9 +21,11 @@ window.ROIET_RITUAL = {
   hint: 'อากาศฮ้อน กลิ่นเริ่มแฮง แมลงวันกะตอมหลาย — หาของมาดูแลร่างบักจ่อยแหน่',
 
   correct: [
-    { item: 'tobacco', place: { left: '38%', top: '40%', width: '18%', rotate: '-9deg' },
+    { item: 'tobacco',
+      art:  '../assets/ritual/roiet/applied-tobacco.png',
       say:  'แม่นแล้ว เอาใบยาสูบรองไว้ใต้ร่าง นิโคตินมันสิช่วยดับกลิ่นได้อยู่' },
-    { item: 'lime',    place: { left: '56%', top: '34%', width: '13%', rotate: '3deg' },
+    { item: 'lime',
+      art:  '../assets/ritual/roiet/applied-lime.png',
       say:  'ดีแล้ว โปรยปูนขาวไว้ แมลงสิบ่มาไข่ใส่ร่างบักจ่อย' }
   ],
 

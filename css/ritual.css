@@ -157,3 +157,22 @@
   .slot, .ghost { height: min(16vw, 19vh); }
   .item-tip { max-width: 44vw; }
 }
+
+/* layer ที่เป็นสไปรท์แยก ไม่ใช่ภาพเต็มแคนวาส เช่นนางเอกที่ยืนมองในด่านญี่ปุ่น */
+.scene__layer--placed {
+  inset: auto;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ป้ายบอกเวลา มุมบนซ้าย เช่น "ห้าปีต่อมา" */
+.caption {
+  position: fixed; left: 4vw; top: 12vh; z-index: 260;
+  color: var(--paper);
+  font-size: clamp(16px, min(1.9vw, 3.4vh), 40px);
+  letter-spacing: .04em;
+  text-shadow: 0 2px 14px rgba(0,0,0,.9);
+  opacity: 0;
+  animation: captionIn 1.4s var(--ease) .5s forwards;
+}
+@keyframes captionIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }

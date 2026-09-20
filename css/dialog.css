@@ -128,3 +128,16 @@
   font-size: clamp(14px, min(1.34vw, 2.4vh), 32px);
 }
 .dialog--plain .dialog__next { right: calc(var(--dlg-w) * .075); bottom: 1.4em; }
+
+/* --- ของประกอบที่โผล่มาตอนบางบรรทัด เช่นถ้วยชาอูรูชิของด่านญี่ปุ่น --- */
+.vn__prop {
+  position: fixed; z-index: 570;
+  right: 9vw; bottom: 34vh;
+  width: min(20vw, 26vh);
+  object-fit: contain;
+  opacity: 0; transform: translateY(14px) scale(.96);
+  pointer-events: none;
+  filter: drop-shadow(0 10px 26px rgba(0,0,0,.7));
+  transition: opacity .35s var(--ease), transform .35s var(--ease);
+}
+.vn__prop.is-present { opacity: 1; transform: none; }

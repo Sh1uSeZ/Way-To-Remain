@@ -19,26 +19,26 @@
       <img class="board__bg" src="./assets/lobby/passport.png" alt="หนังสือเดินทาง">
 
       <!-- data-focus-x/y = จุดที่กล้องจะแพนเข้าไปหา (% ของกระดาน) -->
-      <button class="card card--ticket card--live" type="button"
+      <button class="card card--ticket card--live" type="button" data-stage="roiet"
               data-focus-x="30.71" data-focus-y="71.67"
               data-goto="./stages/roi-et.html"
               data-label="ร้อยเอ็ด — Roi Et, TH">
         <img src="./assets/lobby/ticket-roiet.png" alt="ตั๋วโดยสาร ปลายทาง ร้อยเอ็ด">
       </button>
 
-      <button class="card card--bangkok card--live" type="button"
+      <button class="card card--bangkok card--live" type="button" data-stage="bangkok"
               data-focus-x="30.05" data-focus-y="36.06"
               data-goto="./stages/bangkok.html"
               data-label="กรุงเทพฯ — Bangkok, TH">
         <img src="./assets/lobby/stamp-bangkok.png" alt="ตราวีซ่า กรุงเทพ">
       </button>
-      <button class="card card--png card--live" type="button"
+      <button class="card card--png card--live" type="button" data-stage="papua"
               data-focus-x="72.53" data-focus-y="35.65"
               data-goto="./stages/papua.html"
               data-label="ปาปัวนิวกินี — Papua New Guinea">
         <img src="./assets/lobby/stamp-png.png" alt="ตราตรวจคนเข้าเมือง ปาปัวนิวกินี">
       </button>
-      <button class="card card--japan card--live" type="button"
+      <button class="card card--japan card--live" type="button" data-stage="japan"
               data-focus-x="70.56" data-focus-y="73.24"
               data-goto="./stages/japan.html"
               data-label="ญี่ปุ่น — Japan">
@@ -52,7 +52,7 @@
 
 <script src="./js/core/touch.js"></script>
 <script src="./js/core/preload.js"></script>
-<script src="./js/core/loader.js"></script>
+<script src="./js/core/progress.js"></script>
 <script src="./js/core/audio.js"></script>
 <script src="./js/core/transition.js"></script>
 <script src="./js/core/parallax.js"></script>

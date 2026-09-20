@@ -15,12 +15,14 @@
     tip:   document.getElementById('itemTip'),
     ghost: document.getElementById('ghost'),
     hint:  document.getElementById('hint'),
+    caption: document.getElementById('caption'),
     dialog: {
       root: document.getElementById('dialog'),
       dim:  document.getElementById('dim'),
       name: document.getElementById('dialogName'),
       text: document.getElementById('dialogText'),
-      char: document.getElementById('charSlot')
+      char: document.getElementById('charSlot'),
+      prop: document.getElementById('propSlot')
     }
   });
 

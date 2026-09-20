@@ -1,11 +1,10 @@
 /* หน้าจอโหลด
-   - หน้าแรก (มี MANIFEST) โหลด asset ทั้งเกมรวดเดียว มีปุ่มข้ามให้กดถ้ารอไม่ไหว
-   - หน้าอื่นรอแค่รูปของหน้าตัวเอง ซึ่งปกติจะอยู่ใน cache แล้วเลยผ่านฉิว
-   ไม่รอเสียงให้ decode เสร็จ แค่ดึงลง cache พอ */
+   ใช้เฉพาะหน้าแรก โหลด asset ทั้งเกมให้ครบก่อนถึงจะเข้าเล่นได้
+   รูป เสียง วิดิโอ ฟอนต์ ครบทุกอย่างตั้งแต่ตรงนี้
+   หน้าอื่นไม่ต้องต่อไฟล์นี้เลย ของอยู่ใน cache หมดแล้ว จะได้ไม่มีจอดำแวบคั่นระหว่างเล่น */
 (function () {
-  const CAP_MS  = 12000;   /* หน้าธรรมดา ถ้าไฟล์ไหนค้างก็ต้องปล่อยให้เล่นได้ */
-  const SKIP_MS = 3000;    /* หน้าแรก โชว์ปุ่มข้ามหลังจากนี้ */
-  const LANES   = 6;       /* ดึงพร้อมกันกี่ไฟล์ */
+  const SKIP_MS = 3000;   /* โชว์ปุ่มข้ามหลังจากนี้ */
+  const LANES   = 6;      /* ดึงพร้อมกันกี่ไฟล์ */
 
   const el = document.createElement('div');
   el.className = 'loader';
@@ -17,38 +16,41 @@
       '<button class="loader__skip" type="button">ข้ามการโหลด &rsaquo;</button>' +
     '</div>';
 
-  let bar, count, skip, released = false;
+  let bar, count, mounted = false, released = false;
+
+  function mount() {
+    if (mounted || released) return;
+    mounted = true;
+    document.body.appendChild(el);
+    bar   = el.querySelector('.loader__bar i');
+    count = el.querySelector('.loader__count');
+    el.querySelector('.loader__skip').addEventListener('click', release);
+  }
 
   function show(pct, note) {
     if (!bar || released) return;
     bar.style.width = Math.min(100, Math.round(pct)) + '%';
-    if (note) count.textContent = note;
+    if (note != null) count.textContent = note;
   }
 
   function release() {
     if (released) return;
     released = true;
+    if (!mounted) return;
     el.classList.add('is-done');
     setTimeout(() => el.remove(), 600);
   }
 
-  function mount() {
-    document.body.appendChild(el);
-    bar   = el.querySelector('.loader__bar i');
-    count = el.querySelector('.loader__count');
-    skip  = el.querySelector('.loader__skip');
-    skip.addEventListener('click', release);
-  }
-
-  /* ---------- หน้าแรก: โหลดทั้งเกม ---------- */
+  /* ---------- หน้าแรก: โหลดทั้งเกมให้ครบ ---------- */
   function bootAll(man) {
-    const files = man.images.concat(man.audio);
-    const total = files.reduce((n, f) => n + f[1], 0);
+    mount();
+    const files = (man.images || []).concat(man.audio || [], man.video || []);
+    const total = files.reduce((n, f) => n + f[1], 0) || 1;
     const mb = (b) => (b / 1048576).toFixed(1);
     let got = 0, i = 0;
 
     setTimeout(() => el.classList.add('can-skip'), SKIP_MS);
-    show(0, '0 / ' + mb(total) + ' MB');
+    show(0, '0.0 / ' + mb(total) + ' MB');
 
     const lane = () => {
       if (i >= files.length || released) return Promise.resolve();
@@ -65,31 +67,19 @@
 
     const lanes = [];
     for (let n = 0; n < LANES; n++) lanes.push(lane());
-    return Promise.all(lanes).then(() => {
-      /* ไฟล์อยู่ใน cache แล้ว สั่ง decode รูปต่อให้เลย จะได้ไม่ต้องรอตอนเปลี่ยนหน้า */
-      if (window.Preload) window.Preload.images(man.images.map((f) => f[0]));
-    });
-  }
 
-  /* ---------- หน้าอื่น: รอแค่รูปของหน้าตัวเอง ---------- */
-  function pageOnly() {
-    if (window.Preload) {
-      window.Preload.onProgress((d, t) => {
-        show(t ? (d / t) * 100 : 0, t ? d + ' / ' + t : '');
-      });
-      window.Preload.images([].map.call(document.images, (i) => i.currentSrc || i.src));
-    }
-    const loaded = new Promise((res) => {
-      if (document.readyState === 'complete') return res();
-      window.addEventListener('load', res, { once: true });
-    });
-    setTimeout(release, CAP_MS);
-    return Promise.all([loaded, window.Preload ? window.Preload.idle() : null]);
+    return Promise.all(lanes)
+      .then(() => Promise.all([
+        /* ไฟล์อยู่ใน cache แล้ว สั่ง decode รูปต่อเลย จะได้ไม่ต้องรอตอนเปลี่ยนหน้า */
+        window.Preload ? window.Preload.images((man.images || []).map((f) => f[0])) : null,
+        /* ฟอนต์ไทยมาจาก Google Fonts ถ้าไม่รอ ตัวอักษรจะกระตุกเปลี่ยนหน้าตาทีหลัง */
+        document.fonts ? document.fonts.ready : null
+      ]));
   }
 
   function run() {
-    mount();
-    (window.MANIFEST ? bootAll(window.MANIFEST) : pageOnly()).then(release);
+    if (!window.MANIFEST) return;   /* มีแค่หน้าแรกที่ต้องโหลด */
+    bootAll(window.MANIFEST).then(release);
   }
 
   if (document.readyState === 'loading') {

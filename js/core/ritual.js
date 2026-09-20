@@ -10,14 +10,46 @@
     const need  = cfg.correct.map((c) => c.item);
     const placed = [];
     let first = 0, drag = null, locked = false, finished = false, step = 0;
+    /* ประกาศไว้บนสุด เพราะ buildScene() ถูกเรียกก่อนบรรทัดนี้ ถ้าไปประกาศทีหลังจะติด TDZ */
+    const layerOf = {};
 
-    /* ปิดบทสนทนาแล้ว ถ้าเป็นบทปิดจบค่อยพากลับหน้าเลือกด่าน */
+    /* ปิดบทสนทนาแล้ว ถ้าเป็นบทปิดจบ ให้จดว่าผ่านด่านนี้แล้วค่อยไปต่อ
+       ด่านสุดท้าย (ญี่ปุ่น) ขึ้น The End ก่อนแล้วค่อยกลับหน้าแรก */
     const dialog = window.createDialog(els.dialog, (script) => {
       locked = false;
-      if (script && script.done) goTo(cfg.next);
+      if (!script || !script.done) return;
+      if (cfg.stage && window.Progress) window.Progress.complete(cfg.stage);
+      if (cfg.ending) theEnd(cfg.next);
+      else goTo(cfg.next);
     });
 
+    function theEnd(next) {
+      const end = document.createElement('div');
+      end.className = 'the-end';
+      end.innerHTML = '<div class="the-end__word">The End</div>';
+      document.body.appendChild(end);
+      requestAnimationFrame(() => end.classList.add('is-in'));
+      let gone = false;
+      const leave = () => { if (gone) return; gone = true; goTo(next); };
+      end.addEventListener('click', leave);
+      setTimeout(leave, 4200);
+    }
+
     buildScene();
+
+    /* ด่านที่ไม่มีไอเทมให้ลาก (ญี่ปุ่น) เป็นฉากปิดเฉยๆ ซ่อนแถบของทิ้ง
+       แล้วเล่นบทปิดเลย อ่านจบก็กลับหน้าเลือกด่าน */
+    if (!cfg.correct.length) {
+      els.rail.parentElement.style.display = 'none';
+      if (cfg.hint) els.hint.textContent = cfg.hint;
+      else els.hint.classList.add('is-hidden');
+      if (window.Preload) {
+        window.Preload.images(cfg.scene.layers.map((l) => l.src));
+      }
+      say(cfg.done, true);
+      return dialog;
+    }
+
     const strip = document.createElement('div');
     strip.className = 'rail__strip';
     els.rail.appendChild(strip);
@@ -29,17 +61,27 @@
     if (cfg.intro) say(cfg.intro, false);
 
     /* ---------- ฉาก ---------- */
+    /* layer มีชื่อกำกับ เพราะบางด่านต้องสลับภาพชั้นเดิม ไม่ใช่แค่วางทับ
+       เช่นปาปัว พอรมควันแล้วตัวศพจะคล้ำลง ต้องเปลี่ยนภาพศพทั้งใบ */
     function buildScene() {
       const s = cfg.scene;
       els.scene.style.setProperty('--scene-ar', s.ratio);
       els.scene.classList.add(s.cover ? 'scene--cover' : 'scene--fit');
-      s.layers.forEach((src) => {
+      s.layers.forEach((l) => {
         const img = document.createElement('img');
         img.className = 'scene__layer';
-        img.src = src;
+        img.src = l.src;
         img.alt = '';
+        /* ปกติ layer เป็นภาพเต็มแคนวาส 1980x1080 วางทับกันตรงๆ
+           แต่บางตัวเป็นสไปรท์แยก (นางเอกด่านญี่ปุ่น) ต้องบอกตำแหน่งเอง */
+        if (l.place) {
+          img.classList.add('scene__layer--placed');
+          Object.keys(l.place).forEach((k) => { img.style[k] = l.place[k]; });
+        }
         els.scene.appendChild(img);
+        layerOf[l.id] = img;
       });
+      if (cfg.caption && els.caption) els.caption.textContent = cfg.caption;
       if (els.bg) els.bg.src = cfg.bg;
     }
 
@@ -66,8 +108,9 @@
     function warm() {
       if (!window.Preload) return;
       const urls = Object.keys(ITEMS).map((id) => ITEMS[id].icon)
-        .concat(cfg.scene.layers, [cfg.bg])
-        .concat(cfg.correct.map((c) => c.art).filter(Boolean));
+        .concat(cfg.scene.layers.map((l) => l.src), [cfg.bg])
+        .concat(cfg.correct.map((c) => c.art).filter(Boolean))
+        .concat(cfg.correct.map((c) => c.swap && c.swap.to).filter(Boolean));
       window.Preload.images(urls);
     }
 
@@ -173,6 +216,14 @@
        ถ้าไม่มี art ก็เอาไอคอนไปแปะตามพิกัดใน place
        ถ้าไม่มีทั้งคู่ แปลว่าของชิ้นนั้นไม่ต้องโชว์อะไร */
     function stick(step) {
+      /* บางขั้นเปลี่ยนภาพชั้นเดิมแทนที่จะวางทับ รอให้ decode ก่อนค่อยสลับ
+         ไม่งั้นจะเห็นภาพเก่าค้างเหมือนตอนสลับรูปตัวละคร */
+      if (step.swap && layerOf[step.swap.layer]) {
+        const img = layerOf[step.swap.layer], url = step.swap.to;
+        const apply = () => { img.src = url; };
+        if (window.Preload && window.Preload.isReady(url)) apply();
+        else (window.Preload ? window.Preload.images([url]) : Promise.resolve()).then(apply);
+      }
       if (!step.art && !step.place) return;
       const img = document.createElement('img');
       img.alt = '';

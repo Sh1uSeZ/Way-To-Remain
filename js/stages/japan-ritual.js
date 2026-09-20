@@ -1,8 +1,8 @@
-/* หน้าพิธีศพ ร้อยเอ็ด — ต่อข้อมูลด่านเข้ากับตัวมินิเกมกลาง */
+/* หน้าพิธีศพ ญี่ปุ่น — ต่อข้อมูลด่านเข้ากับตัวมินิเกมกลาง */
 (function () {
-  const R = window.ROIET_RITUAL;
+  const R = window.JAPAN_RITUAL;
 
-  Sound.bgm('bgm-ritual.mp3');
+  Sound.bgm('bgm-japan.mp3');
 
   document.getElementById('hint').textContent = R.hint;
 
