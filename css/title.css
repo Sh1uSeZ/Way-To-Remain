@@ -11,22 +11,36 @@
 
 .stage__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: fill; }
 
+/* ลูกค้าขอเป็นปุ่มสี่เหลี่ยม บอกว่าตัวอักษรลอยๆ เฉยๆ มันโล่งไป
+   ปุ่มวางอยู่บนภาพสีอ่อน เลยใช้พื้นกระดาษ+ขอบหมึก พอ hover ก็สลับสีกัน */
 .start {
   position: absolute; left: 50%; top: 76.4%;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%);
   font-family: var(--font);
-  font-size: 3.4cqw; font-weight: 700;
+  font-size: 2.9cqw; font-weight: 700;
+  letter-spacing: .04em;
   color: var(--ink);
-  background: none; border: 0; padding: .2em .6em;
+  background: rgba(217, 214, 206, .93);
+  border: 0.32cqw solid var(--ink);
+  border-radius: 0;
+  padding: .55em 1.5em;
   cursor: pointer;
-  transition: transform .35s var(--ease), text-shadow .35s var(--ease);
+  box-shadow: 0.35cqw 0.35cqw 0 rgba(21, 19, 15, .85);
+  transition: transform .2s var(--ease), background .2s var(--ease),
+              color .2s var(--ease), box-shadow .2s var(--ease);
 }
 .start:hover,
 .start:focus-visible {
-  transform: translate(-50%, -50%) scale(1.03);
-  text-shadow: 0 0 1.6cqw rgba(217,214,206,.9);
+  background: var(--ink);
+  color: var(--paper);
+  transform: translate(-50%, -50%) translate(-0.12cqw, -0.12cqw);
+  box-shadow: 0.5cqw 0.5cqw 0 rgba(21, 19, 15, .9);
 }
-.start:active { transform: translate(-50%, -50%) scale(1.02); }
+/* กดแล้วให้ปุ่มจมลงไปหาเงา */
+.start:active {
+  transform: translate(-50%, -50%) translate(0.2cqw, 0.2cqw);
+  box-shadow: 0.1cqw 0.1cqw 0 rgba(21, 19, 15, .9);
+}
 
 .intro {
   position: fixed; inset: 0;
