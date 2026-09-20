@@ -100,8 +100,12 @@
   background: url('../assets/ui/brush-tag.svg') center/100% 100% no-repeat;
   aspect-ratio: auto;
   min-height: 24vh;
-  /* ขอบป้ายเป็นรอยพู่กันขรุขระ ต้องเผื่อระยะไม่ให้ตัวอักษรไปนั่งทับขอบ */
-  padding: 2.2em 3.4em 2.4em;
+  /* ลายพู่กันใน svg กินพื้นที่แค่ x 18.6..401.4 ของ viewBox 420 = เว้นขอบข้างละ 4.4%
+     บวก filter ที่ดันขอบเข้ามาอีก ~1.7% รวมแล้วต้องเผื่อเกิน 6%
+     ถ้าใช้ em ตายตัว พอจอกว้างขึ้นขอบพู่กันจะกินเข้ามาเร็วกว่า padding ตัวอักษรเลยหลุดออกนอกกล่อง
+     ใช้ % ตรงๆ ไม่ได้ เพราะกล่องเป็น position:fixed แล้ว % ของ padding จะอิงความกว้างจอ ไม่ใช่ความกว้างกล่อง
+     เลยคำนวณจาก --dlg-w ซึ่งเป็นความกว้างกล่องจริงๆ */
+  padding: 1.9em calc(var(--dlg-w) * .075) 2.1em;
   display: flex; flex-direction: column; justify-content: center;
 }
 /* กล่องนี้ไม่มีธงให้ชื่อเกาะ ชื่อเลยวางตรงๆ ไม่ต้องเอียงตาม */
@@ -123,4 +127,4 @@
   font-weight: 500;
   font-size: clamp(14px, min(1.34vw, 2.4vh), 32px);
 }
-.dialog--plain .dialog__next { right: 2.2em; bottom: 1.2em; }
+.dialog--plain .dialog__next { right: calc(var(--dlg-w) * .075); bottom: 1.4em; }

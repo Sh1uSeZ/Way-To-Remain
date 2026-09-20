@@ -1,8 +1,11 @@
-/* หน้าจอดำตอนโหลด รอให้ "รูป" ของหน้านั้นพร้อมก่อนค่อยให้เล่น
-   รอเฉพาะรูป ไม่รอเสียง เพราะ mp3 ก้อนละหลายเมกะไบต์และมันสตรีมได้อยู่แล้ว
-   ถ้ารอเสียงด้วยจะต้องนั่งมองจอดำเพิ่มอีกหลายวินาทีโดยไม่ได้อะไรขึ้นมา */
+/* หน้าจอโหลด
+   - หน้าแรก (มี MANIFEST) โหลด asset ทั้งเกมรวดเดียว มีปุ่มข้ามให้กดถ้ารอไม่ไหว
+   - หน้าอื่นรอแค่รูปของหน้าตัวเอง ซึ่งปกติจะอยู่ใน cache แล้วเลยผ่านฉิว
+   ไม่รอเสียงให้ decode เสร็จ แค่ดึงลง cache พอ */
 (function () {
-  const CAP_MS = 12000;   /* กันเหนียว ไฟล์ไหนโหลดไม่ขึ้นก็ต้องปล่อยให้เล่นได้ */
+  const CAP_MS  = 12000;   /* หน้าธรรมดา ถ้าไฟล์ไหนค้างก็ต้องปล่อยให้เล่นได้ */
+  const SKIP_MS = 3000;    /* หน้าแรก โชว์ปุ่มข้ามหลังจากนี้ */
+  const LANES   = 6;       /* ดึงพร้อมกันกี่ไฟล์ */
 
   const el = document.createElement('div');
   el.className = 'loader';
@@ -11,29 +14,15 @@
       '<div class="loader__label">กำลังโหลด</div>' +
       '<div class="loader__bar"><i></i></div>' +
       '<div class="loader__count"></div>' +
+      '<button class="loader__skip" type="button">ข้ามการโหลด &rsaquo;</button>' +
     '</div>';
 
-  let bar, count, released = false;
+  let bar, count, skip, released = false;
 
-  function mount() {
-    document.body.appendChild(el);
-    bar   = el.querySelector('.loader__bar i');
-    count = el.querySelector('.loader__count');
-    if (window.Preload) {
-      window.Preload.onProgress(show);
-      /* นับรูปที่อยู่ใน markup ด้วย ไม่งั้นหลอดจะเด้งไป 100% ทั้งที่ฉากยังโหลดไม่เสร็จ
-         เรียกซ้ำ URL เดิมไม่ได้โหลดซ้ำ เบราว์เซอร์จ่ายจาก cache ให้ */
-      window.Preload.images([].map.call(document.images, (i) => i.currentSrc || i.src));
-    }
-    show(window.Preload ? window.Preload.progress().done : 0,
-         window.Preload ? window.Preload.progress().total : 0);
-  }
-
-  function show(done, total) {
+  function show(pct, note) {
     if (!bar || released) return;
-    const pct = total ? Math.round((done / total) * 100) : 0;
-    bar.style.width = pct + '%';
-    count.textContent = total ? done + ' / ' + total : '';
+    bar.style.width = Math.min(100, Math.round(pct)) + '%';
+    if (note) count.textContent = note;
   }
 
   function release() {
@@ -43,16 +32,64 @@
     setTimeout(() => el.remove(), 600);
   }
 
-  /* รอสองอย่าง: รูปที่อยู่ใน DOM ตั้งแต่แรก (window load) กับรูปที่สคริปต์สั่งโหลดเพิ่ม */
-  function run() {
-    mount();
+  function mount() {
+    document.body.appendChild(el);
+    bar   = el.querySelector('.loader__bar i');
+    count = el.querySelector('.loader__count');
+    skip  = el.querySelector('.loader__skip');
+    skip.addEventListener('click', release);
+  }
+
+  /* ---------- หน้าแรก: โหลดทั้งเกม ---------- */
+  function bootAll(man) {
+    const files = man.images.concat(man.audio);
+    const total = files.reduce((n, f) => n + f[1], 0);
+    const mb = (b) => (b / 1048576).toFixed(1);
+    let got = 0, i = 0;
+
+    setTimeout(() => el.classList.add('can-skip'), SKIP_MS);
+    show(0, '0 / ' + mb(total) + ' MB');
+
+    const lane = () => {
+      if (i >= files.length || released) return Promise.resolve();
+      const [url, bytes] = files[i++];
+      return fetch(url, { cache: 'force-cache' })
+        .then((r) => r.blob())
+        .catch(() => null)
+        .then(() => {
+          got += bytes;
+          show((got / total) * 100, mb(got) + ' / ' + mb(total) + ' MB');
+          return lane();
+        });
+    };
+
+    const lanes = [];
+    for (let n = 0; n < LANES; n++) lanes.push(lane());
+    return Promise.all(lanes).then(() => {
+      /* ไฟล์อยู่ใน cache แล้ว สั่ง decode รูปต่อให้เลย จะได้ไม่ต้องรอตอนเปลี่ยนหน้า */
+      if (window.Preload) window.Preload.images(man.images.map((f) => f[0]));
+    });
+  }
+
+  /* ---------- หน้าอื่น: รอแค่รูปของหน้าตัวเอง ---------- */
+  function pageOnly() {
+    if (window.Preload) {
+      window.Preload.onProgress((d, t) => {
+        show(t ? (d / t) * 100 : 0, t ? d + ' / ' + t : '');
+      });
+      window.Preload.images([].map.call(document.images, (i) => i.currentSrc || i.src));
+    }
     const loaded = new Promise((res) => {
       if (document.readyState === 'complete') return res();
       window.addEventListener('load', res, { once: true });
     });
-    const imgs = window.Preload ? window.Preload.idle() : Promise.resolve();
-    Promise.all([loaded, imgs]).then(release);
     setTimeout(release, CAP_MS);
+    return Promise.all([loaded, window.Preload ? window.Preload.idle() : null]);
+  }
+
+  function run() {
+    mount();
+    (window.MANIFEST ? bootAll(window.MANIFEST) : pageOnly()).then(release);
   }
 
   if (document.readyState === 'loading') {
