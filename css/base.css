@@ -66,3 +66,38 @@ button, button:focus, button:focus-visible, button::-moz-focus-inner {
 .mute:hover { opacity: .9; }
 .mute::before { content: '♪'; font-size: 1.15em; line-height: 1; }
 :root.is-muted .mute::before { content: '♪'; opacity: .35; text-decoration: line-through; }
+
+/* --- หน้าจอโหลด รอเฉพาะรูป เสียงปล่อยให้สตรีมไปเรื่อยๆ --- */
+.loader {
+  position: fixed; inset: 0; z-index: 9500;
+  display: grid; place-items: center;
+  background: var(--void);
+  opacity: 1; transition: opacity .5s var(--ease);
+}
+.loader.is-done { opacity: 0; pointer-events: none; }
+
+.loader__box { width: min(62vw, 420px); text-align: center; }
+
+.loader__label {
+  color: var(--paper); opacity: .8;
+  font-size: clamp(13px, 1.3vw, 20px);
+  margin-bottom: 1em; letter-spacing: .04em;
+}
+
+.loader__bar {
+  height: 4px; width: 100%;
+  background: rgba(217, 214, 206, .16);
+  overflow: hidden;
+}
+.loader__bar i {
+  display: block; height: 100%; width: 0;
+  background: var(--accent);
+  transition: width .3s var(--ease);
+}
+
+.loader__count {
+  margin-top: .8em;
+  color: var(--paper); opacity: .45;
+  font-size: clamp(11px, 1vw, 15px);
+  font-variant-numeric: tabular-nums;
+}
