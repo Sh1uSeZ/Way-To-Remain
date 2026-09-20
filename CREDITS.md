@@ -103,6 +103,7 @@ Like the rest of the code, no licence is granted for them — see [LICENSE](LICE
 | `assets/audio/sfx-blip.mp3` | Dialog typewriter | — | — |
 | `assets/audio/sfx-select.mp3` | Dialog advance | — | — |
 | `assets/audio/sfx-error.mp3` | Wrong item in the ritual minigame | Supplied by the client as `universfield-wrong-answer-126515.mp3` — filename points to Universfield on Pixabay, **unconfirmed** | — |
+| `assets/audio/amb-airport.mp3` | Crowd ambience under the opening video | Supplied by the client as `airport amb 101.mp3` | — |
 | `assets/audio/bgm-ritual.mp3` | Minigame background music | Supplied by the client as `lilliben-dark-ambient-background-mystery-365195.mp3` — filename points to Lilliben on Pixabay, **unconfirmed** | — |
 
 Background music is used on the Roi Et stage only. The title screen and lobby have

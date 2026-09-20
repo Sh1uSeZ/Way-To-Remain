@@ -14,16 +14,19 @@
   }
 
   let done = false;
+  let amb = null;   /* เสียงคนในสนามบิน เล่นคลอวิดิโอเปิด จบแล้วหยุด ไม่ตามไปหน้าอื่น */
 
   function toLobby() {
     if (done) return;
     done = true;
+    Sound.stop(amb, 500);
     window.goTo('./lobby.html');
   }
 
   startBtn.addEventListener('click', () => {
     Sound.play('confirm');
     intro.classList.add('is-playing');
+    amb = Sound.introAmb('amb-airport.mp3');
     video.play().catch(toLobby);
   });
 

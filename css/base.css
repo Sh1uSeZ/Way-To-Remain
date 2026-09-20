@@ -152,3 +152,27 @@ button, button:focus, button:focus-visible, button::-moz-focus-inner {
   transition: opacity 1.4s var(--ease) .7s, transform 1.4s var(--ease) .7s;
 }
 .the-end.is-in .the-end__word { opacity: 1; transform: none; }
+
+/* --- ข้อความปิดเรื่อง เฟดดำแล้วขึ้นทีละบรรทัด --- */
+.epilogue {
+  position: fixed; inset: 0; z-index: 9300;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.1em;
+  padding: 8vw;
+  background: var(--void);
+  opacity: 0; transition: opacity 1.8s var(--ease);
+  pointer-events: none;
+}
+.epilogue.is-in { opacity: 1; }
+
+.epilogue__line {
+  margin: 0; max-width: 34em;
+  text-align: center;
+  color: var(--paper);
+  font-size: clamp(15px, min(1.5vw, 2.7vh), 34px);
+  line-height: 1.7;
+  opacity: 0; transform: translateY(10px);
+  transition: opacity 1.5s var(--ease), transform 1.5s var(--ease);
+}
+.epilogue__line.is-in { opacity: 1; transform: none; }

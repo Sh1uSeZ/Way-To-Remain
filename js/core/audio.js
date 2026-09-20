@@ -5,6 +5,10 @@
     amb: 0.25,   // เสียงธรรมชาติ
     sfx: 0.55
   };
+  /* เสียงคนในสนามบินตอนวิดิโอเปิด ต้องเบากว่า amb ปกติ
+     เพราะในวิดิโอมีคนพูดไทยอยู่ ถ้าดังไปจะกลบเสียงพูด */
+  const VOL_INTRO_AMB = 0.13;
+
   /* เสียงบางตัวดังกว่าตัวอื่นโดยธรรมชาติ ลดเฉพาะตัวนั้น */
   const QUIETER = { whoosh: 0.3 };
   const FADE_MS = 2200;
@@ -77,11 +81,32 @@
     return a;
   }
 
+  /* หยุดลูปแบบค่อยๆ เบาลง ใช้ตอนวิดิโอเปิดจบแล้วต้องตัดเสียงสนามบินทิ้ง
+     ตัดปุบปับมันสะดุดหู แล้วต้องถอดออกจาก loops ด้วย
+     ไม่งั้นกดปุ่มเสียงทีหลังมันจะกลับมาเล่นใหม่เอง */
+  function stop(a, ms) {
+    if (!a) return;
+    clearInterval(a._fade);
+    const from = a.volume, t0 = Date.now(), dur = ms || 500;
+    a._fade = setInterval(() => {
+      const k = Math.min(1, (Date.now() - t0) / dur);
+      a.volume = from * (1 - k);
+      if (k >= 1) {
+        clearInterval(a._fade);
+        a.pause();
+        const i = loops.findIndex((l) => l.el === a);
+        if (i >= 0) loops.splice(i, 1);
+      }
+    }, 40);
+  }
+
   const api = {
     muted: localStorage.getItem('wtr-muted') === '1',
     play,
+    stop,
     bgm: (file) => loop(file, VOL.bgm),
-    amb: (file) => loop(file, VOL.amb),
+    amb: (file, level) => loop(file, level == null ? VOL.amb : level),
+    introAmb: (file) => loop(file, VOL_INTRO_AMB),
     // ลูปเป็น element ลอย ๆ ไม่อยู่ใน DOM หา element ตรง ๆ ไม่เจอ ถ้าเสียงมีปัญหาเรียกดูตรงนี้
     state: () => loops.map(({ el, target }) => ({
       file: el.src.split('/').pop(),

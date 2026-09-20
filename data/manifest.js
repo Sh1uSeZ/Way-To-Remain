@@ -55,6 +55,7 @@ window.MANIFEST = {
     ["./assets/ui/dialog-p5.png", 46795]
   ],
   audio: [
+    ["./assets/audio/amb-airport.mp3", 974400],
     ["./assets/audio/amb-roiet.mp3", 1428480],
     ["./assets/audio/bgm-bangkok.mp3", 5207808],
     ["./assets/audio/bgm-japan.mp3", 4403618],

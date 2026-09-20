@@ -17,23 +17,11 @@
        ด่านสุดท้าย (ญี่ปุ่น) ขึ้น The End ก่อนแล้วค่อยกลับหน้าแรก */
     const dialog = window.createDialog(els.dialog, (script) => {
       locked = false;
+      if (script && typeof script.after === 'function') { script.after(); return; }
       if (!script || !script.done) return;
       if (cfg.stage && window.Progress) window.Progress.complete(cfg.stage);
-      if (cfg.ending) theEnd(cfg.next);
-      else goTo(cfg.next);
+      goTo(cfg.next);
     });
-
-    function theEnd(next) {
-      const end = document.createElement('div');
-      end.className = 'the-end';
-      end.innerHTML = '<div class="the-end__word">The End</div>';
-      document.body.appendChild(end);
-      requestAnimationFrame(() => end.classList.add('is-in'));
-      let gone = false;
-      const leave = () => { if (gone) return; gone = true; goTo(next); };
-      end.addEventListener('click', leave);
-      setTimeout(leave, 4200);
-    }
 
     buildScene();
 
@@ -43,10 +31,12 @@
       els.rail.parentElement.style.display = 'none';
       if (cfg.hint) els.hint.textContent = cfg.hint;
       else els.hint.classList.add('is-hidden');
-      if (window.Preload) {
-        window.Preload.images(cfg.scene.layers.map((l) => l.src));
-      }
-      say(cfg.done, true);
+      if (cfg.stage && window.Progress) window.Progress.complete(cfg.stage);
+      /* ต้องรอภาพฉากพร้อมก่อนค่อยเริ่มนับจังหวะ ไม่งั้นบนเน็ตช้าๆ
+         ซีนแรกจะหมดเวลาไปตั้งแต่ยังไม่ทันเห็นอะไรเลย */
+      const art = cfg.scene.layers.map((l) => l.src);
+      const ready = window.Preload ? window.Preload.images(art) : Promise.resolve();
+      ready.then(() => window.createOutro(els, dialog, layerOf).run(cfg.beats, cfg.next));
       return dialog;
     }
 
@@ -196,8 +186,12 @@
 
     /* ---------- ตัดสินถูกผิด ---------- */
     function use(id) {
-      const step = cfg.correct[need.indexOf(id)];
+      const at = need.indexOf(id);
+      const step = cfg.correct[at];
       if (!step || placed.indexOf(id) >= 0) return scold();
+      /* ของถูกแต่ยังไม่ถึงคิว พิธีมีลำดับของมัน ข้ามขั้นไม่ได้
+         (ปาปัวต้องถายาก่อนค่อยจุดไฟ จุดไฟก่อนไม่ได้) */
+      if (at !== placed.length) return tooEarly(at);
       placed.push(id);
       stick(step);
       paint();
@@ -210,6 +204,13 @@
       if (window.Sound) window.Sound.play('error');
       const lines = cfg.wrong;
       say([lines[Math.floor(Math.random() * lines.length)]], false);
+    }
+
+    /* ของชิ้นนี้ใช้ถูกแล้ว แต่ต้องทำอย่างอื่นให้เสร็จก่อน */
+    function tooEarly(at) {
+      if (window.Sound) window.Sound.play('error');
+      const list = cfg.early || cfg.wrong;
+      say([list[Math.min(at, list.length - 1)]], false);
     }
 
     /* art = ภาพ "ตอนวางแล้ว" ที่ลูกค้าวาดมาเต็มแคนวาส วางทับได้เลย
@@ -239,7 +240,12 @@
         img.style.transform =
           'translate(-50%, -50%) rotate(' + (step.place.rotate || '0deg') + ')';
       }
-      els.scene.appendChild(img);
+      /* ปกติของที่วางจะอยู่บนสุด แต่บางชิ้นต้องอยู่ใต้ layer อื่น
+         เช่นใบยาสูบของร้อยเอ็ดที่ต้องรองอยู่ใต้ตัวศพ ไม่ใช่ปิดทับตัวศพ
+         ลำดับการวาดยึดตามลำดับใน DOM เลยแทรกไว้ก่อน layer นั้นแทนการต่อท้าย */
+      const below = step.under && layerOf[step.under];
+      if (below) els.scene.insertBefore(img, below);
+      else els.scene.appendChild(img);
       requestAnimationFrame(() => img.classList.add('is-in'));
     }
 
