@@ -1,0 +1,10 @@
+/* ตำแหน่งหาด้วย template match กับไฟล์ "ตัวอย่าง" ของลูกค้า ฉาก 3965x1080 */
+.obj--deputy { left: 72.9634%; top: 37.0370%; width:  6.9105%; }
+.obj--corpse { left: 45.2459%; top: 60.0000%; width: 16.3430%; }
+
+.hotspot--deputy { left: 73.5183%; top: 40.7407%; width:  5.0694%; height: 53.9815%; }
+.hotspot--corpse { left: 46.6583%; top: 65.5556%; width: 14.3506%; height: 30.7407%; }
+
+@media (pointer: coarse) {
+  .hotspot--deputy { left: 71.9%; width: 8.2%; }
+}

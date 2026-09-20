@@ -52,23 +52,28 @@
 .dialog.is-open { opacity: 1; pointer-events: auto; transform: translate(-50%, 0); cursor: pointer; }
 
 /* ตำแหน่งวัดจากภาพจริง: แถบชื่อด้านบนซ้าย ตัวข้อความอยู่กลางลำตัวกล่อง */
+/* วางกลางธงชื่อพอดี แกนธงเอียง -12.74 องศา (วัดด้วย PCA จากพิกเซลขาวในภาพ)
+   ธงยาวใช้ได้ ~22.6% ของความกว้างกล่อง หนา ~17% ของความสูง */
+/* ธงชื่อในภาพบางมาก (ช่องว่างจริงแค่ 285x31px = 9% ของความสูงกล่อง)
+   ใส่ชื่อไทยขนาดอ่านออกไม่ได้ จึงวาดแผ่นป้ายสีเดียวกับธงต่อความหนาให้พอดีกับตัวอักษร
+   วางกลางธงและเอียงตามแกนธง (-12.74°) เลยกลืนไปเป็นเนื้อเดียวกัน */
 .dialog__name {
-  position: absolute; left: 20.6%; top: 9.5%;
-  width: 26%; height: 17%;
-  display: flex; align-items: center;
-  transform: rotate(-3.82deg);
-  font-size: clamp(8px, min(0.67vw, 1.2vh), 21px); font-weight: 800;
-  /* แถบชื่อในภาพเป็นพื้นสีขาว ตัวอักษรต้องเป็นสีเข้ม */
+  position: absolute; left: 21.05%; top: 25.4%;
+  transform: translate(-50%, -50%) rotate(-12.74deg);
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .12em .85em;
+  background: #fff;
+  font-size: clamp(12px, min(1.18vw, 2.1vh), 30px); font-weight: 800;
+  line-height: 1.25;
   color: #0b0a09; white-space: nowrap;
 }
 .dialog__name.is-hidden { display: none; }
 
 .dialog__text {
   position: absolute;
-  left: 20.2%; right: 20.2%; top: 34%; bottom: 13%;
+  left: 15.5%; right: 20%; top: 38%; bottom: 25%;
   display: flex; align-items: center;
-  transform: rotate(2.19deg);
-  font-size: clamp(10px, min(0.88vw, 1.57vh), 28px);
+  font-size: clamp(13px, min(1.28vw, 2.26vh), 34px);
   font-weight: 600;
   line-height: 1.45;
   white-space: pre-wrap;
@@ -82,7 +87,10 @@
 }
 @keyframes nudge { 0%,100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
 
+/* จอเตี้ยมาก: ถ้าใช้สัดส่วนเดิม กล่องจะเล็กจนตัวอักษรชนขั้นต่ำของ clamp แล้วล้นออกนอกกล่อง
+   จึงขยายกล่องแทน — ต้องแก้ที่ --dlg-w เพื่อให้ตัวละครขยับตามไปด้วย */
 @media (max-height: 560px) {
+  :root { --dlg-w: min(92vw, calc(52vh * 3.556)); }
   .dialog { bottom: 2vh; }
   .vn__char { height: 78vh; bottom: -5vh; }
 }

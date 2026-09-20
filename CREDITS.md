@@ -40,6 +40,10 @@ permission. See [LICENSE](LICENSE).
 | `assets/japan/scene.png` | Japanese temple path panorama (3965 × 1080) |
 | `assets/japan/monk.png` | Sweeping monk object layer |
 | `assets/chars/japan-monk-portrait.png` | Monk portrait for the dialog box |
+| `assets/papua/scene.png` | Papua New Guinea village panorama (3965 × 1080) |
+| `assets/papua/deputy.png` | Deputy chief object layer |
+| `assets/papua/corpse.png` | The late chief on the drying rack |
+| `assets/chars/papua-deputy-portrait.png` | Deputy chief portrait for the dialog box |
 | `assets/audio/bgm-bangkok.mp3` | Bangkok background music (client's "thai bgm") |
 | `assets/audio/bgm-japan.mp3` | Japan background music (client's "jap bgm") |
 
