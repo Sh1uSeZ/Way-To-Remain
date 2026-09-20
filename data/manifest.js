@@ -1,5 +1,6 @@
 /* ไฟล์ทั้งหมดที่เกมใช้ พร้อมขนาดเป็นไบต์ หน้าแรกโหลดให้ครบก่อนถึงจะเริ่มเล่นได้
    ใส่ขนาดไว้เลยเพื่อคิด % ได้แม่นโดยไม่ต้องยิง HEAD ถามทีละไฟล์ก่อน
+   ชื่อไฟล์ต้องตรงตัวพิมพ์เป๊ะ GitHub Pages เป็น Linux แยกตัวพิมพ์เล็กใหญ่
    ถ้าเพิ่มไฟล์ใหม่ใน assets/ ต้องมาเติมที่นี่ด้วย ไม่งั้นหน้าแรกจะไม่โหลดให้ */
 window.MANIFEST = {
   images: [
@@ -28,7 +29,7 @@ window.MANIFEST = {
     ["./assets/lobby/ticket-roiet.png", 169036],
     ["./assets/papua/corpse.png", 110760],
     ["./assets/papua/deputy.png", 82680],
-    ["./assets/papua/scene.PNG", 2380647],
+    ["./assets/papua/scene.png", 2380647],
     ["./assets/ritual/bangkok/applied-flowers.png", 71233],
     ["./assets/ritual/bangkok/bed.png", 849504],
     ["./assets/ritual/bangkok/corpse.png", 322740],

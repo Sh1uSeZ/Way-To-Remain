@@ -48,6 +48,20 @@ permission. See [LICENSE](LICENSE).
 | `assets/ritual/bangkok/bed.png` | Bangkok bier — white background keyed out by the developer, artwork unchanged |
 | `assets/ritual/bangkok/corpse.png` | Bangkok shrouded body — white background keyed out by the developer, artwork unchanged |
 | `assets/ritual/bangkok/applied-flowers.png` | Scattered incense flowers shown once the player gives the เครื่องหอม |
+| `assets/ritual/roiet/bed.png` | Roi Et bier layer |
+| `assets/ritual/roiet/corpse.png` | Roi Et body layer |
+| `assets/ritual/roiet/applied-tobacco.png` | Tobacco leaves once laid under the body |
+| `assets/ritual/roiet/applied-lime.png` | Slaked lime once scattered over the body |
+| `assets/ritual/papua/bed.png` | Papua New Guinea drying rack layer |
+| `assets/ritual/papua/corpse.png` | The late chief before smoking |
+| `assets/ritual/papua/corpse-burnt.png` | The same body after smoking, darkened |
+| `assets/ritual/papua/applied-clay.png` | Red clay and fat once applied |
+| `assets/ritual/papua/applied-smoke.png` | Smoke once the fire is lit |
+| `assets/ritual/bg-japan.png` | Japan ritual backdrop — client's "Bg for japan ritual only" |
+| `assets/ritual/japan/monk.png` | The self-mummified monk |
+| `assets/ritual/japan/bowl.png` | Steaming urushi tea bowl — client's "something.PNG" |
+| `assets/ritual/japan/player.png` | The protagonist — downscaled by the developer from the client's 6614 × 9354 original |
+| `assets/ritual/bangkok/speaker.png` | Framed portrait of the courtier — supplied but unused (client asked for him beside the dialog box instead) |
 | `assets/items/tobacco.png` | Tobacco leaf — ritual item |
 | `assets/items/lime.png` | Slaked lime — ritual item |
 | `assets/items/flowers.png` | Dried flowers / incense — ritual item |
@@ -66,15 +80,18 @@ The client also supplied layout reference images (the files named
 `ตัวอย่างจัดวาง…`). Those are not committed here — they were used only to
 measure where each asset sits, and every position in the CSS is taken from them.
 
-## UI brush panels — mine
+## UI brush tag — mine
 
-`assets/ui/brush-panel.svg` and `assets/ui/brush-tag.svg` are the dialog box and
-label backgrounds. I generated them from scratch as SVG paths — no stock art, no
-traced or downloaded image — so they carry no third-party licence.
+`assets/ui/brush-tag.svg` is the hand-inked black label used for the stage name tags,
+the back button, the minigame's dialog box, its item slots, scroll arrows and tooltips.
+I generated it from scratch as SVG paths — no stock art, no traced or downloaded
+image — so it carries no third-party licence.
 
-They are a stand-in matched to the client's ink style. If the client would rather
-paint their own brush frames, dropping replacements at those two paths is the only
-change needed.
+It is a stand-in matched to the client's ink style. If the client would rather paint
+their own brush frame, dropping a replacement at that one path is the only change needed.
+
+(An earlier `brush-panel.svg` for the choice dialog was dropped — the client asked to
+skip choice dialogs, so it no longer exists.)
 
 Like the rest of the code, no licence is granted for them — see [LICENSE](LICENSE).
 
